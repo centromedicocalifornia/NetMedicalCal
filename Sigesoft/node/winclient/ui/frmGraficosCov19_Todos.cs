@@ -1,0 +1,493 @@
+﻿using Sigesoft.Node.WinClient.BE.Custom;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+
+namespace Sigesoft.Node.WinClient.UI
+{
+    public partial class frmGraficosCov19_Todos : Form
+    {
+        DateTime inicio_;
+        DateTime fin_;
+
+        ArrayList Tipo_1 = new ArrayList();
+        ArrayList Cantidad_1 = new ArrayList();
+
+        ArrayList TipoPositivo = new ArrayList();
+        ArrayList CantidadPositivo = new ArrayList();
+
+        ArrayList TipoSerologica = new ArrayList();
+        ArrayList CantidadSerologica = new ArrayList();
+
+        ArrayList TipoAntigeno = new ArrayList();
+        ArrayList CantidadAntigeno = new ArrayList();
+
+        ArrayList TipoMolecular = new ArrayList();
+        ArrayList CantidadMOlecular = new ArrayList();
+
+        ArrayList TipoPOSITIVO = new ArrayList();
+        ArrayList CantidadPOSITIVO = new ArrayList();
+
+        ArrayList TipoPositivos = new ArrayList();
+        ArrayList CantidadPositivos = new ArrayList();
+
+        ArrayList PorcentajesPositivos = new ArrayList();
+        ArrayList PorcentajesPositivosCantidad = new ArrayList();
+        List<ServiceCovid19> DataSource_1 = new List<ServiceCovid19>();
+
+
+        ArrayList Tipo = new ArrayList();
+        ArrayList Cantidad = new ArrayList();
+
+        ArrayList TipoSERVICIO = new ArrayList();
+        ArrayList CantidadSERVICIO = new ArrayList();
+
+        ArrayList Sexo_Tipe = new ArrayList();
+        ArrayList Sexo_Cant = new ArrayList();
+
+        ArrayList Etareo_Tipe = new ArrayList();
+        ArrayList Etareo_Cant = new ArrayList();
+
+        ArrayList Etareo_Tipe_Rest = new ArrayList();
+        ArrayList Etareo_Cant_Rest = new ArrayList();
+
+        string nombrePositivos = "";
+        string _chartPositivosPorc = "";
+
+        public frmGraficosCov19_Todos(DateTime inicio, DateTime fin, List<ServiceCovid19> _DataSource_1)
+        {
+            inicio_ = inicio;
+            fin_ = fin;
+            DataSource_1 = _DataSource_1;
+            InitializeComponent();
+        }
+
+        private void frmGraficosCov19_Todos_Load(object sender, EventArgs e)
+        {
+            List<ServiceCovid19> DataSource_2 = new List<ServiceCovid19>();
+            List<ServiceCovid19> DataSource_3 = new List<ServiceCovid19>();
+            List<ServiceCovid19> DataSource_4 = new List<ServiceCovid19>();
+
+            //DataSource_1 = new ServiceBL().GetServicesCovid19(inicio_, fin_);
+            //var result = query.GroupBy(g => g.v_ServiceId).Select(s => s.First()).ToList();
+            DataSource_1 = DataSource_1.OrderBy(p => p.FECHA.Value).ToList();
+
+            DataSource_2 = DataSource_1.GroupBy(p => p.FECHA.Value.ToShortDateString()).Select(s => s.First()).ToList();
+
+            int countpositivos = 0;
+            int countserologica = 0;
+            int countantigeno = 0;
+            int countmolecular = 0;
+            int countpositivo = 0;
+            decimal porcentaje = 0;
+            decimal cantidad = 0;
+
+            int cantidadPositivos = 0;
+            foreach (var item in DataSource_2)
+            {
+                DataSource_3 = DataSource_1.FindAll(p => p.FECHA.Value.ToShortDateString() == item.FECHA.Value.ToShortDateString()).ToList();
+
+                DataSource_4 = DataSource_3.GroupBy(p => p.RESULTADO).Select(s => s.First()).ToList();
+
+
+                foreach (var item2 in DataSource_4)
+                {
+                    if (item2.RESULTADO == "POSITIVO" || item2.RESULTADO == "IgM e IgG Positivo" || item2.RESULTADO == "IgM Positivo" || item2.RESULTADO == "IgG Positivo")
+                    {
+                        List<ServiceCovid19> DataSource_Cont = new List<ServiceCovid19>();
+                        DataSource_Cont = DataSource_3.FindAll(p => p.RESULTADO == "POSITIVO" || p.RESULTADO == "IgM e IgG Positivo" || p.RESULTADO == "IgM Positivo" || p.RESULTADO == "IgG Positivo").ToList();
+                        countpositivos = DataSource_Cont.Count();
+                    }
+                }
+                TipoPositivo.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+                CantidadPositivo.Add(countpositivos);
+
+
+                porcentaje = Decimal.Round((Convert.ToDecimal((countpositivos) * 100) / DataSource_3.Count()), 2);
+
+                Tipo_1.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+
+                cantidad = Decimal.Round((100 - porcentaje), 2);
+                Cantidad_1.Add(cantidad);
+
+                //positivos diarios
+                TipoPositivos.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+                cantidadPositivos = countpositivos;
+                CantidadPositivos.Add(cantidadPositivos);
+
+                PorcentajesPositivos.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+                PorcentajesPositivosCantidad.Add(porcentaje);
+
+                countpositivos = 0;
+                cantidad = cantidadPositivos = 0;
+            }
+
+
+            DateTime _finOriginal = fin_.Date.AddDays(-1);
+            chartPositivosPorc.Titles[0].Text = _chartPositivosPorc = "PACIENTES ATENDIDOS DEL " + inicio_.ToShortDateString() + " AL " + _finOriginal.ToShortDateString() + " COVID-19 ";
+
+            chartPositivosPorc.Series[0].Points.DataBindXY(Tipo_1, Cantidad_1);
+            chartPositivosPorc.Series[1].Points.DataBindXY(PorcentajesPositivos, PorcentajesPositivosCantidad);
+
+            ///
+
+            chartPositivos.Series[0].Points.DataBindXY(TipoPositivo, CantidadPositivo);
+
+            chartPositivos.Titles[0].Text = nombrePositivos = "CURVA COMPARATIVA DE RESULTADOS POSITIVOS COVID-19 DEL" + inicio_.ToShortDateString() + " AL " + _finOriginal.ToShortDateString();
+
+
+            chartPositivosDiarios.Series[0].Points.DataBindXY(TipoPositivos, CantidadPositivos);
+            chartPositivosDiarios.Titles[0].Text = "GRÁFICO LINEAL DE RESULTADOS POSITIVOS COVID-19 DEL" + inicio_.ToShortDateString() + " AL " + _finOriginal.ToShortDateString();
+
+
+            #region GRUPO ETAREO
+
+            int niño_c = 0;
+            int niño_val = 0;
+
+            int niño_positivo = 0;
+            int niño_negativo = 0;
+
+            int adolescente_c = 0;
+            int adolescente_val = 0;
+
+            int adolescente_positivo = 0;
+            int adolescente_negativo = 0;
+
+            int joven_c = 0;
+            int joven_val = 0;
+
+            int joven_positivo = 0;
+            int joven_negativo = 0;
+
+            int adulto_c = 0;
+            int adult_val = 0;
+
+            int adulto_positivo = 0;
+            int adulto_negativo = 0;
+
+            int adulto_mayor_c = 0;
+            int adulto_mayor_val = 0;
+
+            int adulto_mayor_positivo = 0;
+            int adulto_mayor_negativo = 0;
+
+            foreach (var item in DataSource_1)
+            {
+                if (item.EDAD >= 0 && item.EDAD <= 11)//niño
+                {
+                    if (item.RESULTADO == "NEGATIVO" || item.RESULTADO == "NO VÁLIDO")
+                    {
+                        niño_negativo++;
+                    }
+                    else if (item.RESULTADO == "POSITIVO" || item.RESULTADO == "IgM e IgG Positivo" || item.RESULTADO == "IgM Positivo" || item.RESULTADO == "IgG Positivo")
+                    {
+                        niño_positivo++;
+                    }
+
+                    niño_c++;
+                }
+                else if (item.EDAD >= 12 && item.EDAD <= 17)//adolescente
+                {
+                    if (item.RESULTADO == "NEGATIVO" || item.RESULTADO == "NO VÁLIDO")
+                    {
+                        adolescente_negativo++;
+                    }
+                    else if (item.RESULTADO == "POSITIVO" || item.RESULTADO == "IgM e IgG Positivo" || item.RESULTADO == "IgM Positivo" || item.RESULTADO == "IgG Positivo")
+                    {
+                        adolescente_positivo++;
+                    }
+                    adolescente_c++;
+                }
+                else if (item.EDAD >= 18 && item.EDAD <= 29)//joven
+                {
+                    if (item.RESULTADO == "NEGATIVO" || item.RESULTADO == "NO VÁLIDO")
+                    {
+                        joven_negativo++;
+                    }
+                    else if (item.RESULTADO == "POSITIVO" || item.RESULTADO == "IgM e IgG Positivo" || item.RESULTADO == "IgM Positivo" || item.RESULTADO == "IgG Positivo")
+                    {
+                        joven_positivo++;
+                    }
+                    joven_c++;
+                }
+                else if (item.EDAD >= 30 && item.EDAD <= 59)//adulto
+                {
+                    if (item.RESULTADO == "NEGATIVO" || item.RESULTADO == "NO VÁLIDO")
+                    {
+                        adulto_negativo++;
+                    }
+                    else if (item.RESULTADO == "POSITIVO" || item.RESULTADO == "IgM e IgG Positivo" || item.RESULTADO == "IgM Positivo" || item.RESULTADO == "IgG Positivo")
+                    {
+                        adulto_positivo++;
+                    }
+                    adulto_c++;
+                }
+                else if (item.EDAD >= 60)//adulto mayor
+                {
+                    if (item.RESULTADO == "NEGATIVO" || item.RESULTADO == "NO VÁLIDO")
+                    {
+                        adulto_mayor_negativo++;
+                    }
+                    else if (item.RESULTADO == "POSITIVO" || item.RESULTADO == "IgM e IgG Positivo" || item.RESULTADO == "IgM Positivo" || item.RESULTADO == "IgG Positivo")
+                    {
+                        adulto_mayor_positivo++;
+                    }
+                    adulto_mayor_c++;
+                }
+
+            }
+            
+            Etareo_Tipe.Add("0-11");
+            Etareo_Tipe.Add("12-17");
+            Etareo_Tipe.Add("18-29");
+            Etareo_Tipe.Add("30-59");
+            Etareo_Tipe.Add("Mayores 60");
+
+            Etareo_Cant.Add(niño_c);
+            Etareo_Cant.Add(adolescente_c);
+            Etareo_Cant.Add(joven_c);
+            Etareo_Cant.Add(adulto_c);
+            Etareo_Cant.Add(adulto_mayor_c);
+
+            chartEtareo.Series[0].Points.DataBindXY(Etareo_Tipe, Etareo_Cant);
+
+            chartEtarioResult.Series[0].Points.AddXY("0-11", niño_negativo);
+            chartEtarioResult.Series[1].Points.AddXY("0-11", niño_positivo);
+
+            chartEtarioResult.Series[0].Points.AddXY("12-17", adolescente_negativo);
+            chartEtarioResult.Series[1].Points.AddXY("12-17", adolescente_positivo);
+
+            chartEtarioResult.Series[0].Points.AddXY("18-29", joven_negativo);
+            chartEtarioResult.Series[1].Points.AddXY("18-29", joven_positivo);
+
+            chartEtarioResult.Series[0].Points.AddXY("30-59", adulto_negativo);
+            chartEtarioResult.Series[1].Points.AddXY("30-59", adulto_positivo);
+
+            chartEtarioResult.Series[0].Points.AddXY("Mayores 60", adulto_mayor_negativo);
+            chartEtarioResult.Series[1].Points.AddXY("Mayores 60", adulto_mayor_positivo);
+
+            #endregion
+
+            #region RECUENTO DE RESULTADOS COVID-19
+            List<ServiceCovid19> DataSource_2_ = new List<ServiceCovid19>();
+
+            DataSource_2_ = DataSource_1.GroupBy(p => p.RESULTADO).Select(s => s.First()).ToList();
+
+            int cont2 = 0;
+            int cont1 = 1;
+            foreach (var item in DataSource_2_)
+            {
+                
+                //int cont = 0;
+                if (item.RESULTADO == "NEGATIVO")
+                {
+                    Tipo.Add(item.RESULTADO);
+                    int cont = DataSource_1.Count(p => p.RESULTADO == "NEGATIVO");
+                    Cantidad.Add(cont);
+                }
+                else if (item.RESULTADO == "POSITIVO" || item.RESULTADO == "IgM e IgG Positivo" || item.RESULTADO == "IgM Positivo" || item.RESULTADO == "IgG Positivo")
+                {
+                    if (cont1 == 1)
+                    {
+                        Tipo.Add("POSITIVO");
+
+                        cont1++;
+                        cont2 += DataSource_1.Count(p => p.RESULTADO == "POSITIVO" || p.RESULTADO == "IgM e IgG Positivo" || p.RESULTADO == "IgM Positivo" || p.RESULTADO == "IgG Positivo");
+
+                    }
+
+                    
+                }
+                //cont1++;
+            }
+            Cantidad.Add(cont2);
+
+            chartBarras.Titles[0].Text = "RESULTADOS DE PRUEBA RÁPIDA COVID-19 DEL " + inicio_.ToShortDateString() + " AL " + _finOriginal.ToShortDateString();
+            chartBarras.Series[0].Points.DataBindXY(Tipo, Cantidad);
+
+            #endregion
+
+            #region SEXO
+            List<ServiceCovid19> DataSource_5 = new List<ServiceCovid19>();
+            DataSource_5 = DataSource_1.GroupBy(p => p.SEXO).Select(s => s.First()).ToList();
+            foreach (var item in DataSource_5)
+            {
+                if (item.SEXO == "MASCULINO")
+                {
+                    Sexo_Tipe.Add(item.SEXO);
+                    int cont = DataSource_1.Count(p => p.SEXO == "MASCULINO");
+                    Sexo_Cant.Add(cont);
+                }
+                else if (item.SEXO == "FEMENINO")
+                {
+                    Sexo_Tipe.Add(item.SEXO);
+                    int cont = DataSource_1.Count(p => p.SEXO == "FEMENINO");
+                    Sexo_Cant.Add(cont);
+                }
+            }
+
+            chartSexos.Series[0].Points.DataBindXY(Sexo_Tipe, Sexo_Cant);
+            #endregion
+
+            #region SERVICIO
+            List<ServiceCovid19> DataSource_6 = new List<ServiceCovid19>();
+            DataSource_6 = DataSource_1.GroupBy(p => p.ATENCION).Select(s => s.First()).ToList();
+            foreach (var item in DataSource_6)
+            {
+                if (item.ATENCION == "PARTICULAR")
+                {
+                    TipoSERVICIO.Add(item.ATENCION);
+                    int cont = DataSource_1.Count(p => p.ATENCION == "PARTICULAR");
+                    CantidadSERVICIO.Add(cont);
+                }
+                else if (item.ATENCION == "OCUPACIONAL")
+                {
+                    TipoSERVICIO.Add(item.ATENCION);
+                    int cont = DataSource_1.Count(p => p.ATENCION == "OCUPACIONAL");
+                    CantidadSERVICIO.Add(cont);
+                }
+                else if (item.ATENCION == "SEGUROS")
+                {
+                    TipoSERVICIO.Add(item.ATENCION);
+                    int cont = DataSource_1.Count(p => p.ATENCION == "SEGUROS");
+                    CantidadSERVICIO.Add(cont);
+                }
+            }
+            chartPastel.Titles[0].Text = "SERVICIOS COVID-19 DEL " + inicio_.ToShortDateString() + " AL " + _finOriginal.ToShortDateString();
+            chartPastel.Series[0].Points.DataBindXY(TipoSERVICIO, CantidadSERVICIO);
+            #endregion
+
+            #region POR TIPO DE EXAMEN 
+
+            foreach (var item in DataSource_2)
+            {
+                DataSource_3 = DataSource_1.FindAll(p => p.FECHA.Value.ToShortDateString() == item.FECHA.Value.ToShortDateString()).ToList();
+
+                DataSource_4 = DataSource_3.GroupBy(p => p.TIPOEXAMEN).Select(s => s.First()).ToList(); 
+
+                
+                foreach (var item2 in DataSource_4)
+                {
+                    if (item2.TIPOEXAMEN == "PRUEBA RAPIDA")
+                    {
+                        List<ServiceCovid19> DataSource_Cont = new List<ServiceCovid19>();
+                        DataSource_Cont = DataSource_3.FindAll(p => p.TIPOEXAMEN == "PRUEBA RAPIDA").ToList();
+                        countserologica = DataSource_Cont.Count();
+                    }
+                    else if (item2.TIPOEXAMEN == "PRUEBA ANTIGENO")
+                    {
+                        List<ServiceCovid19> DataSource_Cont = new List<ServiceCovid19>();
+                        DataSource_Cont = DataSource_3.FindAll(p => p.TIPOEXAMEN == "PRUEBA ANTIGENO").ToList();
+                        countantigeno = DataSource_Cont.Count();
+                    }
+                    else if (item2.TIPOEXAMEN == "PRUEBA MOLECULAR")
+                    {
+                        List<ServiceCovid19> DataSource_Cont = new List<ServiceCovid19>();
+                        DataSource_Cont = DataSource_3.FindAll(p => p.TIPOEXAMEN == "PRUEBA MOLECULAR").ToList();
+                        countmolecular = DataSource_Cont.Count();
+                    }
+                }
+
+                TipoSerologica.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+                CantidadSerologica.Add(countserologica);
+
+                TipoAntigeno.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+                CantidadAntigeno.Add(countantigeno);
+
+                TipoMolecular.Add(item.FECHA.ToString().Split('/')[0] + "/" + item.FECHA.ToString().Split('/')[1]);
+                CantidadMOlecular.Add(countmolecular);
+
+            }
+            chartTipoPrueba.Series[0].Points.DataBindXY(TipoSerologica, CantidadSerologica);
+            chartTipoPrueba.Series[1].Points.DataBindXY(TipoAntigeno, CantidadAntigeno);
+            chartTipoPrueba.Series[2].Points.DataBindXY(TipoMolecular, CantidadMOlecular);
+
+            chartTipoPrueba.Titles[0].Text = nombrePositivos = "CURVA POR TIPO DE EXAMENES COVID-19 DEL" + inicio_.ToShortDateString() + " AL " + _finOriginal.ToShortDateString();
+            
+            #endregion
+        }
+        private void GuardarGrafico(Chart graficoGuardar, string nombreGuardara)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "JPeg Imagen|*.jpg|Bitmap Imagen|*.bmp|PNG Imagen|*.png";
+            saveFileDialog1.Title = "Guardar Grafico en Imagen";
+            saveFileDialog1.FileName = nombreGuardara.Replace("/", "-");
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName != "")
+            {
+                System.IO.FileStream fs =
+                (System.IO.FileStream)saveFileDialog1.OpenFile();
+                switch (saveFileDialog1.FilterIndex)
+                {
+                    case 1:
+                        graficoGuardar.SaveImage(fs, ChartImageFormat.Jpeg);
+                        MessageBox.Show("Guardada correctamente.");
+                        break;
+                    case 2:
+                        graficoGuardar.SaveImage(fs, ChartImageFormat.Bmp);
+                        MessageBox.Show("Guardada correctamente.");
+                        break;
+                    case 3:
+                        graficoGuardar.SaveImage(fs, ChartImageFormat.Png);
+                        MessageBox.Show("Guardada correctamente.");
+                        break;
+                }
+                fs.Close();
+            }
+        }
+        private void btnDescargarCurvas_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartPositivos, nombrePositivos);
+        }
+
+        private void btnRESULTADOSDEPOSITIVOSPORCENTAJE_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartPositivosPorc, _chartPositivosPorc);
+        }
+
+        private void btnchartEtareo_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartEtareo, "PACIENTES ATENDIDOS POR GRUPO ETAREO DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+        }
+
+        private void btnchartEtarioResult_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartEtarioResult, "RESULTADOS PACIENTES ATENDIDOS POR GRUPO ETAREO DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+        }
+
+        private void btnchartBarras_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartBarras, "RESULTADOS DE PRUEBA RÁPIDA DE COVID-19 DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+        }
+
+        private void btnchartPastel_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartSexos, "PACIENTES ATENDIDOS POR SEXO DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+        }
+
+        private void btnchartSexos_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartPastel, "SERVICIOS COVID-19 DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+        }
+
+        private void btnchartPositivosDiarios_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartPositivosDiarios, "GRÁFICO LINEAL DE RESULTADOS POSITIVOS COVID-19 DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GuardarGrafico(chartTipoPrueba, "RESULTADOS POSITIVOS COVID-19 DEL " + inicio_.ToShortDateString() + " AL " + fin_.ToShortDateString());
+
+        }
+    }
+}

@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B732067-FEC9-4DA2-AFD9-6DA773094E3E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sigesoft.Node.WinClient.DAL</RootNamespace>
+    <AssemblyName>Sigesoft.Node.WinClient.DAL.MSSQL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DMnodeSQLServer1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DMnodeSQLServer.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedAssemblers\accessuserResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\antecedentesmedicos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\antecedentesocupacionales_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\buscardistritos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\buscarhospitalizacionhabitacionesResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\buscarprotocolopropuesto_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\buscarservicioshospitalizacion_1ResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\buscartickets_1ResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\buscarticketsdetalle_1ResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\concatenatecomponents_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\concatenaterecomendacionesbycategoria_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolvercomponentesconcatenados_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolverdatospaciente_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolverhabitos_personales_listaantecedentesfamiliares_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolverhabitos_personales_listahabitosnoxivos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolverhabitos_personales_listajerarquizada_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolverhabitos_personales_listamedicospersonales_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolvervalorcampoporserviciomejorado_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolvervaloresekghudbay_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\devolvervaloresstshudbay_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\additionalexamAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\adolescenteAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\adultoAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\adultomayorAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\antecedenteasistencialAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\applicationhierarchyAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\areaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\attentioninareaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\attentioninareacomponentAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\authorizedpersonAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\auxiliaryexamAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\blacklistpersonAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\calendarAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\cie10Assembler.cs" />
+    <Compile Include="GeneratedAssemblers\ciiuiAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\codigoempresaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\componentAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\componentfieldAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\componentfieldsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\componentfieldvaluesAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\componentfieldvaluesrecommendationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\componentfieldvaluesrestrictionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\configdxAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\cotizacionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\cotizacionocAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\cotizacionocdetaillAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\cuidadopreventivoAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\cuidadopreventivocomentarioAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\datahierarchyAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\deploymentfileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\diagnosticrepositoryAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\digitalcontactcenterAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\diseasesAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\dxfrecuenteAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\dxfrecuentedetalleAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\emailAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\embarzoAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\workstationdangersAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\workersscheduledetailAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\workersscheduleAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\warehouseAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\vigilanciaserviceAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\vigilanciaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\variablesentorno_resultadosclinicoswebAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\vacationsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\typeofeepAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\tramasAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\trackingAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\ticketdetalleAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\ticketAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\systemuserrolenodeAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\systemusergobalprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\systemuserAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\systemparameterAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\supplierAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\softwarecomponentreleaseAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\smsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\serviceorderdetailAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\serviceorderAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicemultimediaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicecomponentsdownloadAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicecomponentmultimediaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicecomponentfieldvaluesmultimediaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicecomponentfieldvaluesAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicecomponentfieldsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servicecomponentAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\serviceAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\serversyncstatusAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\servernodesyncAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\secuentialAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\rolenodeprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\rolenodecomponentprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\rolenodeAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\rolcuotadetalleAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\rolcuotaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\restrictionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\restrictedwarehouseprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\recommendationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\recetadespachoAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\recetaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\receipheaderAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\protocolsystemuserAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\protocolcomponentAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\protocolAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\professionalAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\productwarehouseAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\productsformigrationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\productAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\procedurebyserviceAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\problemaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\planvigilanciadiseasesAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\planvigilanciaAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\planintegralAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\planAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\personmedicalhistoryAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\personAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\paymentmedicAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\paymentdetailAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\paymentAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\pacientmultimediadataAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\pacientAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\organizationpersonAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\organizationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\ordenreporteAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\occupationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\noxioushabitsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\notificationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodesyncstatusAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodeserviceprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodeorganizationprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodeorganizationlocationwarehouseprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodeorganizationlocationprofileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodedatabasestatusAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\nodeAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\ninioAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\multimediafileAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\movementdetailAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\movementAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\menssgeAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\medicoAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\medicationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\masterrecommendationrestricctionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\markingsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\logAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\locationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\liquidacionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\inmunizacionesAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\hospitalizacionserviceAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\hospitalizacionhabitacionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\hospitalizacionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\horariosAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\holidaysAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\historyAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\historialaccessuserAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\groupoccupationAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gesAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\familymedicalantecedentsAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\facturaciondetalleAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\facturacionAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\especialityAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\envionatclarAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\valorescomponente_managerreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\updateservicecomponent2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\updateservicecomponent1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\searchpersonResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\resumentipopagoResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\resumentipoempresaResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\reporteosteomuscular_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\reportematrizshauindo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\reportematrizsanlorenzo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\reportematrizlazanja_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\reportegerencialResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\reporteatencionmedicaResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenervaloresResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenertodasprovincia_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenerproductoResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenerpreciotarifarioResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenerpacientes_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenernetoporcobrarResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenerlistadocuidadospreventivos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obteneridsparaimportacionexcel_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenergesoid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obteneresoantecedentesporgrupoid2__spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obteneresoantecedentesporgrupoid1__spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenercontactoemergencia_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenercomentarioscuidadospreventivos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\obtenerareas_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\llenarperson_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\llenarcombousuarios_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\llenarcomboprotocolo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\llenarcomboprotocolo_particular_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\llenarcombogetservicetype_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\llenarcomboaltitud_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\listmissingexamenesnames_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\listgetrecommendationbyserviceid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\listgetdiagnosticbyserviceid1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\listcalendarsambhsResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\listcalendarhorariosambhsResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\isobservadoResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\isexistuserResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getworkstationdangersagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getworkerdata_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getverificarescritura_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getvaloresexamencomponete_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getvalorescomponenteodontogramavalue1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getvalorescomponenteodontograma_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getvalorescomponenteamc__spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getvalorescomponente_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getvalorescomponente_observadoamc_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gettypeofeeppagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getticketreportResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemuserexternalpagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemusercorrelativoResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemuserResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemparameterspagedandfilterednew_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemparameterforcomboformeso_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemparameterforcomboform_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsystemparameterforcombo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsolicitudesculminadasformonthsResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsolicitudesconcluidastodayResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getsintomascovid19_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicespagedandfilteredestadisticasnooc_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicespagedandfilteredestadisticas_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicespagedandfilteredandcomponentes_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicespagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getserviceshort_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicescovid19antigeno_filters_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicescovid19_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicescovid19_seg_val_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicescovid19_filters_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicesconsolidateforservice_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicescomponentarchivo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicesResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicerestrictionsforgridview_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicerestrictionsbydiagnosticrepositoryid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicerestrictionbydiagnosticrepositoryidreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicereport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicerecommendationbyserviceid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicerecommendationbydiagnosticrepositoryidreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicerecommendationbydiagnosticrepositoryid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicepersondata_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getserviceinformationResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getserviceidResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicefortramaspageandfilteredhospitalizacion_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicefortramaspageandfilteredambulatorio_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicedisgnosticsreports_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicedata_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponenttotaldiagnostics_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreportsc_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreportc_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreport_newlab_2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreport_new312_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreport_dxlist_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreport_2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsreport_2_diagnosticrepository_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsinfo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsformanagementreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentsculminados_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponents_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponents_1ResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentfields2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentfields1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentdisgnosticsforgridview_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentdisgnosticsbyserviceid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentdiagnosticsreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentconclusionesdxserviceidreport_todos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentconclusionesdxserviceidreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicecomponentconclusionesdxserviceid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getservicebypersonforcombo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getselectedindexchanged_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getrolenodecomponentprofilebyrolenodeid__spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getrestrictionbyserviceid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreporttoxicologico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreporttestvertigo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreporttamizajedermatologico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportsfreeocupacionalesResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportradiologico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportosteomuscularnuevo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportosteocoimalache_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportodontograma_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportinformeradiografico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreporthistoriaocupacional_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportfichaotoscopia_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportevaosteosanmartin_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportevaneurologica_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportevaluacionpsicolaborlapersonal_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportevaluacioncardiologia_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportestudioelectrocardiografico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportesintomaticorespiratorio_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportelumbosaca_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportelectrogold_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreporteergnomia_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportcuestionarionordico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportcuestionarioespirometria_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportconsentimiento_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportcocainamarihuana_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportaudiometria_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getreportantropometria_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getrecommendationbyserviceidandcomponent_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getrecomendationsResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getrecomendationbyserviceidandcomponentconcatec_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getrecetatoreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpurchaseventanillaandonlineResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpurchaseefectivoandonlineResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getprotocolpagedandfiltered_filt_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getprotocolcomponentslist_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getprotocolcomponents_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getproblemapagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getplanintegralandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpersonmedicalhistoryreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpersonmedicalhistorypagedandfilteredbypersonid1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpersonmedicalhistorypagedandfilteredbypersonid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpassoldResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getparentnamesystemparameter_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpacientspagedandfiltered_apellidos_nombre_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpacientreportepsfirmamedicoocupacional_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpacientreporteps_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpacientreporteps_neworganizationid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getpacient_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getorsetrequestcomponentsResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getorganizationfacturacion_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getordenreporteResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getobtenerusuarioanterior_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getobtenerfirmamedico_2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getobtenerfechascuidadospreventivos__spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getnoxioushabitsreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getnoxioushabitspagedandfilteredbypersonid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getnombremedicolab_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getnombregrabaaptitud_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getnombreempresalab_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getmusculoesqueletico_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getlistvaluecomponent_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getlistusersResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getlistsmspendientesResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getlistservicetoaptitud_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getlistrequestcomponentsResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getlistaatencionesparahistoria_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getjoinorganizationandlocation_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getjoinorganizationandlocation_list_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinfouserclientResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinformacionprotocoloservicio_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinformacionprotocolocompletoasservice_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinformacion_otrosexamenes_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinformacion_otrosexamenes_new_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinformacion_laboratorio_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinfopersonResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinfopaymentResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getinfomedicalcenter_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getimagepersonResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gethospitalizacionpagedandfilteredestadisticasResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gethospitalizacionpagedandfiltered_1ResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gethistoryreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gethistorypagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gethistoriaclinicapsicologica_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getfototipo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getformaction_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getfirmamedicos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getfileResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getfichapsicologicaocupacional_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getfamilymedicalantecedentsreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getfamilymedicalantecedentspagedandfilteredbypersonid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getembarazofiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getedadpersonResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdxfrecuentes_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdxResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdoctophisicalexam_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdiseasespagedandfiltered_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdigitalcontactcenternew_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdigitalcontactcenter_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdiagnosticrepositorybycomponent3_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdiagnosticrepositorybycomponent2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdiagnosticrepositorybycomponent1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdevolverdatosusuariograboexamen_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdevolverdatosusuariofirma_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdevolveraptitud_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdevolverantecedentespersonales_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdetailcompletepurchaseResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdatostrabajador_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdatosprotocolo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdataorganizationid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getdatahierarchyforcombo_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcustionarioaudiometria_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getconcatenatetypeofeep_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getconcatenaterecommendation_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getconcatenateexposiciones_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getconcatenateepps_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcomponentsexistResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcategoriaexamenfaltanteeso_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcarnevacuna_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcapsm_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcapsd_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcape_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getcapc_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getbaucherResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getaudiometriacoimolache_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getaptitudmedicoservicio_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getaptitudecertificaterefact_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getantecedentconsolidateforservice4_sp_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getantecedentconsolidateforservice3_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getantecedentconsolidateforservice2_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getantecedentconsolidateforservice1_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getanamnesisreport_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getalturaestructural_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getallpuestos_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getallcomponentsbyrolenodeid_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\getaccessusermonthResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciaventasResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciatipoprotocolosegurosResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciatipoprotocoloResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciatipopagoResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciatipoexamenResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciaresonanciasResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciafarmaciasegurosResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciafarmaciaasistencialResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\gerenciacreditoResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\facturadeudoraResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\existuserResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\existereportfreeocupacionalResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\examenbydefaultorassigned_valuefieldsrestri_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\examenbydefaultorassigned_valuefieldsrecome_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\examenbydefaultorassigned_valuefields_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\examenbydefaultorassigned_components_spResultAssembler.cs" />
+    <Compile Include="GeneratedAssemblers\examenbydefaultorassigned_comfields_spResultAssembler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Server\WebClientAdmin\DAL\MSSQL\Sigesoft.Server.WebClientAdmin.DAL.MSSQL.csproj">
+      <Project>{733B4265-75BB-431F-9B19-1D8A483CBAD8}</Project>
+      <Name>Sigesoft.Server.WebClientAdmin.DAL.MSSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BE\Sigesoft.Node.WinClient.BE.csproj">
+      <Project>{FF8E51F3-510E-4E90-9627-0AD3E9CB8F5C}</Project>
+      <Name>Sigesoft.Node.WinClient.BE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DMnodeSQLServer.Diagram1.view">
+      <DependentUpon>DMnodeSQLServer.edmx</DependentUpon>
+    </None>
+    <DevartEntityDeploy Include="DMnodeSQLServer.edmx">
+      <Generator>DevartEfGenerator</Generator>
+      <LastGenOutput>DMnodeSQLServer1.Designer.cs</LastGenOutput>
+    </DevartEntityDeploy>
+    <None Include="DMnodeSQLServer.edps">
+      <DependentUpon>DMnodeSQLServer.edmx</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\SigesoftEntitiesModel.datasource" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

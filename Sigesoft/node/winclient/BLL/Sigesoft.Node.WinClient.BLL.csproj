@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4650C86-DB62-4FA8-8475-0887031A0C05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sigesoft.Node.WinClient.BLL</RootNamespace>
+    <AssemblyName>Sigesoft.Node.WinClient.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdditionalExamBL.cs" />
+    <Compile Include="AplicationHierarchyBL.cs" />
+    <Compile Include="AreaBL.cs" />
+    <Compile Include="AseguradoraBL.cs" />
+    <Compile Include="AtencionesIntegralesBL.cs" />
+    <Compile Include="AtencionIntegralBL.cs" />
+    <Compile Include="AuthorizedPersonBL.cs" />
+    <Compile Include="BlackListBL.cs" />
+    <Compile Include="CalendarBL.cs" />
+    <Compile Include="ConnectionHelperSige.cs" />
+    <Compile Include="CustomReportBL.cs" />
+    <Compile Include="DataHierarchyBL.cs" />
+    <Compile Include="DigitalContactCenterBL.cs" />
+    <Compile Include="DxFrecuenteBL.cs" />
+    <Compile Include="DynamicScheduleBl.cs" />
+    <Compile Include="EmailBL.cs" />
+    <Compile Include="EmbarazoBL.cs" />
+    <Compile Include="FacturacionBL.cs" />
+    <Compile Include="GerenciaBl.cs" />
+    <Compile Include="GerenciaCampaniaBl.cs" />
+    <Compile Include="GerenciaContrataBl.cs" />
+    <Compile Include="GerenciaCreditoBl.cs" />
+    <Compile Include="GerenciaFarmaciaAsistencialBL.cs" />
+    <Compile Include="GerenciaFarmaciaSegurosBL.cs" />
+    <Compile Include="GerenciaMesBl.cs" />
+    <Compile Include="GerenciaProtocoloBL.cs" />
+    <Compile Include="GerenciaProtocoloSegurosBL.cs" />
+    <Compile Include="GerenciaResonanciasBL.cs" />
+    <Compile Include="GerenciaTipoExamenBl.cs" />
+    <Compile Include="GerenciaTipoPagoBl.cs" />
+    <Compile Include="GerenciaTreeTipoPago.cs" />
+    <Compile Include="GerenciaVentaBL.cs" />
+    <Compile Include="GesBL.cs" />
+    <Compile Include="GroupOccupationBL.cs" />
+    <Compile Include="HabitacionBL.cs" />
+    <Compile Include="HistoryBL.cs" />
+    <Compile Include="HolidayBL.cs" />
+    <Compile Include="HospitalizacionBL.cs" />
+    <Compile Include="HospitalizacionHabitacionBL.cs" />
+    <Compile Include="LiquidacionBL.cs" />
+    <Compile Include="ListaDxsTramas.cs" />
+    <Compile Include="ListaProcedimientos.cs" />
+    <Compile Include="ListaUpsEspecialidades.cs" />
+    <Compile Include="LocationBL.cs" />
+    <Compile Include="LogBL.cs" />
+    <Compile Include="MasterRecommendationRestricctionBL.cs" />
+    <Compile Include="MigracionBL.cs" />
+    <Compile Include="MovementBL.cs" />
+    <Compile Include="MedicalExamBL.cs" />
+    <Compile Include="MedicalExamFieldsBL.cs" />
+    <Compile Include="MedicalExamFieldValuesBL.cs" />
+    <Compile Include="MultimediaFileBL.cs" />
+    <Compile Include="Natclar.cs" />
+    <Compile Include="NodeBL.cs" />
+    <Compile Include="OccupationBL.cs" />
+    <Compile Include="OperationsNatclarBe.cs" />
+    <Compile Include="OperationsNatclarBl.cs" />
+    <Compile Include="OrganizationBL.cs" />
+    <Compile Include="PacientBL.cs" />
+    <Compile Include="PacientListNew.cs" />
+    <Compile Include="PagoEspecialistaOcupacionalBl.cs" />
+    <Compile Include="PersonList_2.cs" />
+    <Compile Include="PlanAtencionIntegralBL.cs" />
+    <Compile Include="PlanIntegralBL.cs" />
+    <Compile Include="ProblemaBL.cs" />
+    <Compile Include="ProcedenciaAsistencialBL.cs" />
+    <Compile Include="ProductBL.cs" />
+    <Compile Include="ProfessionalBL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtocolBL.cs" />
+    <Compile Include="RolCuotaBL.cs" />
+    <Compile Include="RolCuotaDetalleBL.cs" />
+    <Compile Include="SecurityBL.cs" />
+    <Compile Include="ServiceBL.cs" />
+    <Compile Include="ServiceComponentListReportSolo.cs" />
+    <Compile Include="ServiceDetailBL.cs" />
+    <Compile Include="ServiceOrderBL.cs" />
+    <Compile Include="ServiciosDetalleBL.cs" />
+    <Compile Include="SpecialistConfigurationBl.cs" />
+    <Compile Include="SupplierBL.cs" />
+    <Compile Include="SystemParameterBL.cs" />
+    <Compile Include="TicketBL.cs" />
+    <Compile Include="TrackingBL.cs" />
+    <Compile Include="TramasBL.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="WarehouseBL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Sigesoft.Common.csproj">
+      <Project>{83b4875b-6b20-49f1-891d-b1f379760899}</Project>
+      <Name>Sigesoft.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Server\WebClientAdmin\BE\Sigesoft.Server.WebClientAdmin.BE.csproj">
+      <Project>{B78BC42C-F0B2-4842-8C13-8D0DF6DBE65D}</Project>
+      <Name>Sigesoft.Server.WebClientAdmin.BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BE\Sigesoft.Node.WinClient.BE.csproj">
+      <Project>{ff8e51f3-510e-4e90-9627-0ad3e9cb8f5c}</Project>
+      <Name>Sigesoft.Node.WinClient.BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\dal\mssql\Sigesoft.Node.WinClient.DAL.MSSQL.csproj">
+      <Project>{0b732067-fec9-4da2-afd9-6da773094e3e}</Project>
+      <Name>Sigesoft.Node.WinClient.DAL.MSSQL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

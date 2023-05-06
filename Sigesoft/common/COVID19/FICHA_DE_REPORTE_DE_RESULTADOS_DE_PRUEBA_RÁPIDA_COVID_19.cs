@@ -1,0 +1,540 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
+using Sigesoft.Node.WinClient.BE;
+
+namespace NetPdf
+{
+    public class FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_19
+    {
+        private static void RunFile(string filePDF)
+        {
+            Process proceso = Process.Start(filePDF);
+            proceso.WaitForExit();
+            proceso.Close();
+        }
+        public static void CreateFICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_19(ServiceList DataService, string filePDF,
+         PacientList datosPac,
+         organizationDto infoEmpresaPropietaria, PacientList filiationData,
+         List<ServiceComponentList> serviceComponent, UsuarioGrabo MedicoGrabo, UsuarioGrabo MedicoOcupacional)
+        {
+            Document document = new Document(PageSize.A4, 30f, 30f, 50f, 0f);
+
+
+            document.SetPageSize(iTextSharp.text.PageSize.A4);
+
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filePDF, FileMode.Create));
+            pdfPage page = new pdfPage();
+            writer.PageEvent = page;
+            document.Open();
+
+            #region Declaration Tables
+            var subTitleBackGroundColor = new BaseColor(System.Drawing.Color.Gray);
+            string include = string.Empty;
+            List<PdfPCell> cells = null;
+            float[] columnWidths = null;
+            PdfPTable header2 = new PdfPTable(6);
+            header2.HorizontalAlignment = Element.ALIGN_CENTER;
+            header2.WidthPercentage = 100;
+            float[] widths1 = new float[] { 16.6f, 18.6f, 16.6f, 16.6f, 16.6f, 16.6f };
+            header2.SetWidths(widths1);
+            PdfPTable companyData = new PdfPTable(6);
+            companyData.HorizontalAlignment = Element.ALIGN_CENTER;
+            companyData.WidthPercentage = 100;
+            float[] widthscolumnsCompanyData = new float[] { 16.6f, 16.6f, 16.6f, 16.6f, 16.6f, 16.6f };
+            companyData.SetWidths(widthscolumnsCompanyData);
+            PdfPTable filiationWorker = new PdfPTable(4);
+            PdfPTable table = null;
+            document.Add(new Paragraph("\r\n"));
+            #endregion
+
+            #region Fonts
+            Font fontTitle1 = FontFactory.GetFont("Calibri", 10, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            Font fontTitle2 = FontFactory.GetFont("Calibri", 7, iTextSharp.text.Font.NORMAL, new BaseColor(System.Drawing.Color.Black));
+            Font fontTitleTable = FontFactory.GetFont("Calibri", 6, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            Font fontTitleTableNegro = FontFactory.GetFont("Calibri", 6, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            Font fontSubTitle = FontFactory.GetFont("Calibri", 6, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.White));
+            Font fontSubTitleNegroNegrita = FontFactory.GetFont("Calibri", 6, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+
+            Font fontColumnValue = FontFactory.GetFont("Calibri", 7, iTextSharp.text.Font.NORMAL, new BaseColor(System.Drawing.Color.Black));
+            Font fontColumnValueBold = FontFactory.GetFont("Calibri", 7, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            Font fontColumnValueApendice = FontFactory.GetFont("Calibri", 5, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            Font fontColumnValue1 = FontFactory.GetFont("Calibri", 8, iTextSharp.text.Font.NORMAL, new BaseColor(System.Drawing.Color.Black));
+            Font fontColumnValueBold1 = FontFactory.GetFont("Calibri", 8, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            Font fontColumnValue2 = FontFactory.GetFont("Calibri", 6, iTextSharp.text.Font.NORMAL, new BaseColor(System.Drawing.Color.Black));
+
+            #endregion
+
+            #region TÍTULO
+            var tamaño_celda = 14f;
+            cells = new List<PdfPCell>();
+
+            //if (infoEmpresa.b_Image != null)
+            //{
+            //    iTextSharp.text.Image imagenEmpresa = iTextSharp.text.Image.GetInstance(HandlingItextSharp.GetImage(infoEmpresa.b_Image));
+            //    imagenEmpresa.ScalePercent(25);
+            //    imagenEmpresa.SetAbsolutePosition(40, 790);
+            //    document.Add(imagenEmpresa);
+            //}
+
+            iTextSharp.text.Image imagenMinsa = iTextSharp.text.Image.GetInstance("C:/Banner/PLANTILLA - VERTICAL.png");
+            imagenMinsa.ScalePercent(40);
+            imagenMinsa.SetAbsolutePosition(0, 0);
+            imagenMinsa.Alignment = iTextSharp.text.Image.UNDERLYING;
+            document.Add(imagenMinsa);
+
+            var cellsTit = new List<PdfPCell>()
+                { 
+                    new PdfPCell(new Phrase("", fontColumnValueBold1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 38f, Border = PdfPCell.NO_BORDER},
+                    new PdfPCell(new Phrase("FICHA DE REPORTE DE RESULTADOS DE PRUEBA \n RÁPIDA COVID-19", fontTitle1)) {Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 38f, Border = PdfPCell.NO_BORDER},
+                    new PdfPCell(new Phrase("", fontColumnValueBold1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 38f, Border = PdfPCell.NO_BORDER},
+
+                    new PdfPCell(new Phrase("", fontColumnValueBold1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},
+                    new PdfPCell(new Phrase("N° de Registro:", fontColumnValueBold1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},
+                    new PdfPCell(new Phrase(datosPac.v_IdService, fontColumnValue1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},
+                    new PdfPCell(new Phrase("", fontColumnValueBold1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},
+
+                    new PdfPCell(new Phrase("", fontColumnValueBold1)) {HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},
+
+                };
+            columnWidths = new float[] { 5f, 83f, 17f, 5f};
+            table = HandlingItextSharp.GenerateTableFromCells(cellsTit, columnWidths, null, fontTitleTable);
+            document.Add(table);
+            #endregion
+
+            ServiceComponentList covid = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_19_ID);
+
+            #region INFORMACIÓN GENERAL
+            string tipodoc = "";
+            //if (datosPac.i_DocTypeId == 1) { tipodoc = "DNI"; }
+            //else if (datosPac.i_DocTypeId == 2) { tipodoc = "PAS"; }
+            //else if (datosPac.i_DocTypeId == 3) { tipodoc = "LIC. COND."; }
+            //else if (datosPac.i_DocTypeId == 4) { tipodoc = "CARNET EXT"; }
+            cells = new List<PdfPCell>()
+            {    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("DATOS DEL PACIENTE", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER, BackgroundColor = BaseColor.LIGHT_GRAY},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Tipo de documento:", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(datosPac.i_DocTypeId == 1 ?"( X )":"(   )", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("DNI", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(datosPac.i_DocTypeId == 4 ?"( X )":"(   )", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Carnet de Extranjería", fontColumnValue)){ Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(datosPac.i_DocTypeId == 2 ?"( X )":"(   )", fontColumnValue)){ Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Pasaporte", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Número de documento:", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.v_DocNumber, fontColumnValue)){ Colspan = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Celular:", fontColumnValueBold)){ Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.v_TelephoneNumber, fontColumnValue)){ Colspan = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Edad:", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.Edad.ToString(), fontColumnValue)){ Colspan = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Sexo:", fontColumnValueBold)){ Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.i_SexTypeId.ToString() == "1"?"MASCULINO":"FEMENINO", fontColumnValue)){ Colspan = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Nombres:", fontColumnValueBold)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Apellido Paterno:", fontColumnValueBold)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Apellido Materno:", fontColumnValueBold)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase(datosPac.v_FirstName, fontColumnValue)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.v_FirstLastName, fontColumnValue)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.v_SecondLastName, fontColumnValue)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Dirección", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(datosPac.v_AdressLocation, fontColumnValue)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Departamento:", fontColumnValueBold)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Provincia:", fontColumnValueBold)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Distrito:", fontColumnValueBold)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase(datosPac.v_DepartamentName, fontColumnValue)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.v_ProvinceName, fontColumnValue)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(datosPac.v_DistrictName, fontColumnValue)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Nombre del EESS", fontColumnValueBold)){ Colspan = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(infoEmpresaPropietaria.v_Name, fontColumnValue)){ Colspan = 14, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("RENIPRESS:", fontColumnValueBold)){ Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("00012761", fontColumnValue)){ Colspan = 15, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 8f, Border = PdfPCell.NO_BORDER},    
+
+            };
+            columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+            table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+            document.Add(table);
+            #endregion
+
+            #region PERSONAL DE SALUD
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_1 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_1) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_1).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_2 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_2) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_2).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_3 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_3) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_3).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_4 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_4) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_4).v_Value1;
+
+            cells = new List<PdfPCell>()
+            {         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("¿Es personal de salud?", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_1 == "1" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("SI", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_1 == "0" ?"( X )":"(   )", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("NO", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Cual", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_2, fontColumnValue)){ Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("¿Tiene síntomas?", fontColumnValueBold)){ Colspan = 3 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_3 == "1" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("SI", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_3 == "0" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("NO", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Fecha de inicio de síntomas", fontColumnValueBold)){ Colspan = 4, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_A_4, fontColumnValue)){ Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 2f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 2f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 2f, Border = PdfPCell.NO_BORDER},    
+
+            };
+            columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+            table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+            document.Add(table);
+            #endregion
+
+            #region SINTOMAS
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_1 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_1) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_1).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_2 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_2) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_2).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_3 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_3) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_3).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_4 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_4) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_4).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_5 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_5) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_5).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_6 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_6) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_6).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_7 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_7) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_7).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_8 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_8) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_8).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_9 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_9) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_9).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_10 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_10) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_10).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_11 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_11) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_11).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_12 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_12) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_12).v_Value1;
+
+  
+            cells = new List<PdfPCell>()
+            {         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Marque los síntomas que presenta:", fontColumnValueBold)){ Colspan = 16 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Tos", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_1 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Fiebre / escalofrío", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_2 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Cefalea", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_3 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Dolor de garganta", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_4 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Malestar general", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_5 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Irritabilidad / confusión", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_6 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Congestión nasal", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_7 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Diarrea", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_8 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Dolor de Pecho", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_9 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Dificultad respiratoria", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_10 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Náuseas / vómitos", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_11 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Otros: " + FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_B_12, fontColumnValue)){ Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 16 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+            };
+            columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+            table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+            document.Add(table);
+            #endregion
+
+            #region DATOS DE LA PRUEBA RAPIDA
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_1 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_1) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_1).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_6 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_6) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_6).v_Value1;
+            var FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_7 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_7) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_7).v_Value1;
+
+
+            cells = new List<PdfPCell>()
+            {         
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("DATOS DE LA PRUEBA RÁPIDA", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER, BackgroundColor = BaseColor.LIGHT_GRAY},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Fecha de ejecución de la prueba rápida:", fontColumnValueBold)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_1, fontColumnValue)){ Colspan = 12, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Procedencia de la solicitud de diagnóstico:", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Llamada al 113", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "0" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Contacto con caso confirmado", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "3" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Persona extranjera (migraciones)", fontColumnValueBold)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "5" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+ 
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("De EESS", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "1" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Contacto con caso sospechoso", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "4" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("Personal de salud", fontColumnValueBold)){ Colspan = 6 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "2" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+ 
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("Otro priorizado", fontColumnValueBold)){ Colspan = 4 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_2 == "6" ?"X":string.Empty, fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 13 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.WHITE},    
+ 
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.WHITE, BorderColorTop=BaseColor.BLACK},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Resultado de la PRIMERA PR", fontColumnValueBold)){ Colspan = 9 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Resultado de la SEGUNDA PR, en caso de tener como resultado en la primera:", fontColumnValueBold)){ Colspan = 9, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3 == "2" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Reactivo IgM", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4 == "2" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Reactivo IgM", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3 == "3" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Reactivo IgG", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4 == "3" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Reactivo IgG", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3 == "4" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Reactivo IgM/IgG", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4 == "4" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Reactivo IgM/IgG", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3 == "0" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") No Reactivo", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_4 == "0" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") No Reactivo", fontColumnValueBold)){ Colspan = 7, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("(", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_3 == "1" ?"X":string.Empty, fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(") Inválido", fontColumnValueBold)){ Colspan = 17, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 3f, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Clasificación Clínica de Severidad", fontColumnValueBold)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5 == "3" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Asintomático", fontColumnValue)){ Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5 == "0" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Leve", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5 == "1" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Moderado", fontColumnValue)){ Colspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_5 == "2" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Severa", fontColumnValue)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("¿El paciente presenta alguna condición de riesgo?", fontColumnValueBold)){ Colspan = 7 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_6 == "1" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("SI", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_6 == "0" ?"( X )":"(   )", fontColumnValue)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("NO", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("¿Cuál?", fontColumnValue)){ Colspan = 2 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_RÁPIDA_COVID_C_7, fontColumnValue)){ Colspan = 5 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+             
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 5f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 5f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 5f, Border = PdfPCell.NO_BORDER},    
+
+
+            };
+            columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+            table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+            document.Add(table);
+            #endregion
+
+            #region CONTINUIDAD DE LA ATENCIÓN
+            PdfPCell cellFirmaMedico = null;
+
+            if (MedicoGrabo.Firma != null)
+                cellFirmaMedico = new PdfPCell(HandlingItextSharp.GetImage(MedicoGrabo.Firma, null, null, 130, 60));
+            else
+                cellFirmaMedico = new PdfPCell(new Phrase(" ", fontColumnValue));
+
+            cellFirmaMedico.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+            cellFirmaMedico.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
+
+            PdfPCell cellMedico = null;
+            string empresageneral = filiationData.empresa_;
+            string empresacontrata = filiationData.contrata;
+            string empresasubcontrata = filiationData.subcontrata;
+            if (filiationData.empresa_ == "SOUTHERN PERU COPPER CORPORATION SUCURSAL DEL PERU" || filiationData.contrata == "SOUTHERN PERU COPPER CORPORATION SUCURSAL DEL PERU" || filiationData.subcontrata == "SOUTHERN PERU COPPER CORPORATION SUCURSAL DEL PERU")
+            {
+                if (MedicoOcupacional.Firma != null)
+                    cellMedico = new PdfPCell(HandlingItextSharp.GetImage(MedicoOcupacional.Firma, null, null, 130, 60));
+                else
+                    cellMedico = new PdfPCell(new Phrase(" ", fontColumnValue));
+            }
+            else
+                cellMedico = new PdfPCell(new Phrase(" ", fontColumnValue));
+            
+
+            cellMedico.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+            cellMedico.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
+
+            var PRUEBA_RAPIDA_COVID_19_E_1 = covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PRUEBA_RAPIDA_COVID_19_E_1) == null ? "- - -" : covid.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PRUEBA_RAPIDA_COVID_19_E_1).v_Value1;
+
+            cells = new List<PdfPCell>()
+            {     
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("DATOS DEL PERSONAL QUE REALIZA LA PRUEBA RÁPIDA", fontColumnValueBold)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER, BackgroundColor = BaseColor.LIGHT_GRAY},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda, Border = PdfPCell.NO_BORDER},    
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Nombres y Apellidos", fontColumnValueBold)){ Colspan = 3 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(MedicoGrabo.Nombres + " " + MedicoGrabo.ApPaterno + " " + MedicoGrabo.ApMaterno, fontColumnValue)){ Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                new PdfPCell(cellFirmaMedico){ Colspan = 6, Rowspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(cellMedico){ Colspan = 5, Rowspan = 2, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+     
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Número de DNI:", fontColumnValueBold)){ Colspan = 3 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase(MedicoGrabo.Dni, fontColumnValue)){ Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, UseVariableBorders=true, BorderColorLeft=BaseColor.WHITE,  BorderColorRight=BaseColor.WHITE,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.WHITE},    
+                
+                new PdfPCell(new Phrase("", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValue)){ Colspan = 18 , HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("", fontColumnValue)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 4f, Border = PdfPCell.NO_BORDER},    
+                
+
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+                new PdfPCell(new Phrase("Este formato de registro individual impreso se debe registrar en el formulario web \"FORMULARIO INTEGRADO: F100  F200  F300\" que se encuentra en la página https://web.ins.gob.pe/pr ", fontColumnValueBold)){ Colspan =18, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, UseVariableBorders=true, BorderColorLeft=BaseColor.BLACK,  BorderColorRight=BaseColor.BLACK,  BorderColorBottom=BaseColor.BLACK, BorderColorTop=BaseColor.BLACK, BackgroundColor = BaseColor.LIGHT_GRAY},    
+                new PdfPCell(new Phrase("", fontColumnValueBold)){ Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = 30f, Border = PdfPCell.NO_BORDER},    
+
+            };
+            columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+            table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+            document.Add(table);
+            #endregion
+
+
+            document.Close();
+            writer.Close();
+            writer.Dispose();
+        }
+    }
+}

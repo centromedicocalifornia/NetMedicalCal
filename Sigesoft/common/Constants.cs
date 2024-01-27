@@ -2586,6 +2586,12 @@ namespace Sigesoft.Common
         #endregion
         #endregion
 
+        #region HEMATOLOGIA COVID
+        #region SARSCOV2 - LAB
+        public const string SARSCOV2_ID = "N009-ME000001599";
+        public const string SARSCOV2_VALOR = "N009-MF000007341";
+        #endregion
+        #endregion
         #region HEMATOLOGIA
 
         #region HEMOGRAMA AUTOMATIZADO - LAB
@@ -2632,6 +2638,38 @@ namespace Sigesoft.Common
 
         public const string HA_RESULTADO_VALOR = "N009-MF000005711";
         public const string HA_OTROS_VALOR = "N009-MF000005712";
+        #endregion
+
+        #region HEMOGRAMA MANUAL - LAB
+        public const string HEMOGRAMAMANUAL_ID = "N009-ME000001598";
+
+        public const string HM_HORA_TOMA = "N009-MF000007318";
+
+        public const string HM_HEMATIES_VALOR = "N009-MF000007319";
+        public const string HM_HEMATIES_VALOR_DESEABLE = "N009-MF000007320";
+        public const string HM_HEMOGLOBINA_VALOR = "N009-MF000007321";
+        public const string HM_HEMOGLOBINA_VALOR_DESEABLE = "N009-MF000007322";
+        public const string HM_HEMATOCRITO_VALOR = "N009-MF000007323";
+        public const string HM_HEMATOCRITO_VALOR_DESEABLE = "N009-MF000007324";
+        public const string HM_PLAQUETAS_VALOR = "N009-MF000007325";
+        public const string HM_PLAQUETAS_VALOR_DESEABLE = "N009-MF000007326";
+
+        public const string HM_LEUCOCITOS_VALOR = "N009-MF000007327";
+        public const string HM_LEUCOCITOS_VALOR_DESEABLE = "N009-MF000007328";
+
+        public const string HM_SEGMENTADOS_VALOR = "N009-MF000007329";
+        public const string HM_SEGMENTADOS_VALOR_DESEABLE = "N009-MF000007330";
+        public const string HM_ABASTONADOS_VALOR = "N009-MF000007331";
+        public const string HM_ABASTONADOS_VALOR_DESEABLE = "N009-MF000007332";
+        public const string HM_LINFOCITOS_VALOR = "N009-MF000007333";
+        public const string HM_LINFOCITOS_VALOR_DESEABLE = "N009-MF000007334";
+        public const string HM_MONOCITOS_VALOR = "N009-MF000007335";
+        public const string HM_MONOCITOS_VALOR_DESEABLE = "N009-MF000007336";
+        public const string HM_EOSINOFILOS_VALOR = "N009-MF000007337";
+        public const string HM_EOSINOFILOS_VALOR_DESEABLE = "N009-MF000007338";
+        public const string HM_BASOFILOS_VALOR = "N009-MF000007339";
+        public const string HM_BASOFILOS_VALOR_DESEABLE = "N009-MF000007340";
+        
         #endregion
 
         #region TIEMPO DE COAGULACION Y SANGRIA - LAB

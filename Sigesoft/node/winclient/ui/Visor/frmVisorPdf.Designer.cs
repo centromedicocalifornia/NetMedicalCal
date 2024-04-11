@@ -340,7 +340,7 @@
             this.lblPaciente.AutoSize = true;
             this.lblPaciente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPaciente.ForeColor = System.Drawing.Color.Red;
-            this.lblPaciente.Location = new System.Drawing.Point(74, 28);
+            this.lblPaciente.Location = new System.Drawing.Point(173, 25);
             this.lblPaciente.Name = "lblPaciente";
             this.lblPaciente.Size = new System.Drawing.Size(48, 25);
             this.lblPaciente.TabIndex = 50;
@@ -352,7 +352,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(74, 9);
+            this.label1.Location = new System.Drawing.Point(112, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(321, 25);
             this.label1.TabIndex = 49;
@@ -392,10 +392,10 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::Sigesoft.Node.WinClient.UI.Resources.LOGO_SAN_LORENZO_SL;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(7, 6);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(39, 76);
+            this.pictureBox2.Size = new System.Drawing.Size(99, 76);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 108;
             this.pictureBox2.TabStop = false;

@@ -65,8 +65,8 @@ namespace Sigesoft.Node.WinClient.BLL
                               v_IdUnidadProductiva = A.v_IdUnidadProductiva,
                               Servicio = D.v_Value1,
                               ServicioID = D.i_ParameterId,
-                              i_DeduciblePay = A.i_DeduciblePay.Value
-
+                              i_DeduciblePay = A.i_DeduciblePay.Value,
+                              Segus = A.v_CodigoSegus
 
                           };
 

@@ -44,7 +44,7 @@
             Infragistics.Win.Appearance appearance13 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 0", -1);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("v_MedicalExamId");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("v_Name", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("v_Name");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("v_CategoryName");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("v_ComponentTypeName");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("v_DiagnosableName");
@@ -58,6 +58,7 @@
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Servicio");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ServicioID");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("i_DeduciblePay");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Segus", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
             Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance15 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance16 = new Infragistics.Win.Appearance();
@@ -327,35 +328,37 @@
             ultraGridColumn2.Header.VisiblePosition = 2;
             ultraGridColumn2.Width = 298;
             ultraGridColumn4.Header.Caption = "Categoría";
-            ultraGridColumn4.Header.VisiblePosition = 3;
+            ultraGridColumn4.Header.VisiblePosition = 4;
             ultraGridColumn4.Width = 247;
             ultraGridColumn3.Header.Caption = "Tipo Componente";
-            ultraGridColumn3.Header.VisiblePosition = 9;
+            ultraGridColumn3.Header.VisiblePosition = 10;
             ultraGridColumn6.Header.Caption = "Diagnosticable";
-            ultraGridColumn6.Header.VisiblePosition = 8;
+            ultraGridColumn6.Header.VisiblePosition = 9;
             ultraGridColumn5.Header.Caption = "Usuario Crea.";
-            ultraGridColumn5.Header.VisiblePosition = 7;
+            ultraGridColumn5.Header.VisiblePosition = 8;
             ultraGridColumn5.Width = 125;
             ultraGridColumn10.Format = "dd/MM/yyyy hh:mm tt";
             ultraGridColumn10.Header.Caption = "Fecha Crea.";
-            ultraGridColumn10.Header.VisiblePosition = 10;
+            ultraGridColumn10.Header.VisiblePosition = 11;
             ultraGridColumn10.Width = 150;
             ultraGridColumn12.Header.Caption = "Usuario Act.";
-            ultraGridColumn12.Header.VisiblePosition = 11;
+            ultraGridColumn12.Header.VisiblePosition = 12;
             ultraGridColumn12.Width = 125;
             ultraGridColumn13.Format = "dd/MM/yyyy hh:mm tt";
             ultraGridColumn13.Header.Caption = "Fecha Act.";
-            ultraGridColumn13.Header.VisiblePosition = 12;
+            ultraGridColumn13.Header.VisiblePosition = 13;
             ultraGridColumn13.Width = 150;
             ultraGridColumn11.Header.Caption = "Orden";
             ultraGridColumn11.Header.VisiblePosition = 1;
-            ultraGridColumn15.Header.VisiblePosition = 4;
-            ultraGridColumn16.Header.VisiblePosition = 5;
-            ultraGridColumn17.Header.VisiblePosition = 6;
-            ultraGridColumn26.Header.VisiblePosition = 13;
+            ultraGridColumn15.Header.VisiblePosition = 5;
+            ultraGridColumn16.Header.VisiblePosition = 6;
+            ultraGridColumn16.Width = 96;
+            ultraGridColumn17.Header.VisiblePosition = 7;
+            ultraGridColumn26.Header.VisiblePosition = 14;
             ultraGridColumn26.Hidden = true;
             ultraGridColumn27.Header.Caption = "¿Deducible?";
-            ultraGridColumn27.Header.VisiblePosition = 14;
+            ultraGridColumn27.Header.VisiblePosition = 15;
+            ultraGridColumn28.Header.VisiblePosition = 3;
             ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn2,
@@ -371,7 +374,8 @@
             ultraGridColumn16,
             ultraGridColumn17,
             ultraGridColumn26,
-            ultraGridColumn27});
+            ultraGridColumn27,
+            ultraGridColumn28});
             this.grdDataMedicalExam.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
             this.grdDataMedicalExam.DisplayLayout.InterBandSpacing = 10;
             this.grdDataMedicalExam.DisplayLayout.MaxColScrollRegions = 1;

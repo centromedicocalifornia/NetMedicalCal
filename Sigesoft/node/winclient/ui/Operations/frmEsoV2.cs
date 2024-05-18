@@ -7432,7 +7432,7 @@ namespace Sigesoft.Node.WinClient.UI.Operations
             lector1.Close();
             conectasam.closesigesoft();
 
-            frmRecetaMedica frm = new frmRecetaMedica(_tmpTotalDiagnosticByServiceIdList, _serviceId, _ProtocolId, Globals.ClientSession.i_SystemUserId, userId, username);
+            frmRecetaMedica frm = new frmRecetaMedica(_tmpTotalDiagnosticByServiceIdList.FindAll(p => p.v_FinalQualificationName != "DESCARTADO"), _serviceId, _ProtocolId, Globals.ClientSession.i_SystemUserId, userId, username);
             frm.ShowDialog();
         }
 

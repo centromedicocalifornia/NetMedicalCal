@@ -125,7 +125,7 @@ namespace NetPdf
                 new PdfPCell(new Phrase("\nIdentificado (a) con " +  tipodoc  + " N° " + datosPac.v_DocNumber + " DECLARO haber sido informado(a)", fontColumnValue)) 
                 { Colspan = 20, HorizontalAlignment = iTextSharp.text.Element.ALIGN_JUSTIFIED_ALL, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda , BorderColor=BaseColor.WHITE, ExtraParagraphSpace = 5.0f}, 
 
-                new PdfPCell(new Phrase("respecto de los resultador de mi evaluación médica ocupacional y otros, según el Perfil", fontColumnValue)) 
+                new PdfPCell(new Phrase("respecto de los resultados de mi evaluación médica ocupacional y otros, según el Perfil", fontColumnValue)) 
                 { Colspan = 20, HorizontalAlignment = iTextSharp.text.Element.ALIGN_JUSTIFIED_ALL, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda , BorderColor=BaseColor.WHITE, ExtraParagraphSpace = 5.0f}, 
                 
                 new PdfPCell(new Phrase("de trabajo de la Empresa.", fontColumnValue)) 
@@ -140,10 +140,10 @@ namespace NetPdf
                 new PdfPCell(new Phrase("\nAsí mismo, según la Ley 27269 (Ley de firmas y certificados digitales) AUTORIZO a", fontColumnValue)) 
                 { Colspan = 20, HorizontalAlignment = iTextSharp.text.Element.ALIGN_JUSTIFIED_ALL, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda , BorderColor=BaseColor.WHITE, ExtraParagraphSpace = 5.0f}, 
                 
-                new PdfPCell(new Phrase(infoEmpresaPropietaria.v_Name+" , el uso de mi firma y/o Huella digital en el proceso de mi", fontColumnValue)) 
+                new PdfPCell(new Phrase(infoEmpresaPropietaria.v_Name+" , el uso de mi firma y/o Huella digital en ", fontColumnValue)) 
                 { Colspan = 20, HorizontalAlignment = iTextSharp.text.Element.ALIGN_JUSTIFIED_ALL, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda , BorderColor=BaseColor.WHITE, ExtraParagraphSpace = 5.0f}, 
               
-                new PdfPCell(new Phrase("examen médico ocupacional y emisión de mi certificado correspondiente.", fontColumnValue)) 
+                new PdfPCell(new Phrase("el proceso de mi examen médico ocupacional y emisión de mi certificado correspondiente.", fontColumnValue)) 
                 { Colspan = 20, HorizontalAlignment = iTextSharp.text.Element.ALIGN_JUSTIFIED, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda , BorderColor=BaseColor.WHITE, ExtraParagraphSpace = 5.0f}, 
                 
             };

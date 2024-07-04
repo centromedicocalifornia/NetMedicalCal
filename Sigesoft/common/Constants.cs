@@ -2711,8 +2711,8 @@ namespace Sigesoft.Common
 
         #region HEMOGLOBINA - LAB
         public const string HEMOGLOBINA_ID_aS = "N010-ME000000291";
-        public const string HEMOGLOBINA_AS_VALOR = "N009-MF000007242";
-        public const string HEMOGLOBINA_AS_VALOR_DESEABLE = "N009-MF000007243";
+        public const string HEMOGLOBINA_AS_VALOR = "N009-MF000007342";
+        public const string HEMOGLOBINA_AS_VALOR_DESEABLE = "N009-MF000007343";
        
         #endregion
 

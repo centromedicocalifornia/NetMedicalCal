@@ -3165,6 +3165,8 @@ namespace NetPdf
             ServiceComponentList tiempo_tromboplastina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_ID);
             ServiceComponentList grupo_factor = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.GRUPO_SANGUINEO_Y_FACTOR_RH_ID);
             ServiceComponentList hemoglobina_hematocrito = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.HEMOGLOBINA_HEMATOCRITO_ID);
+            ServiceComponentList hemoglobina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.HEMOGLOBINA_ID_aS);
+
             ServiceComponentList constantes_corpusculares = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.CONSTANTES_CORPUSCULARES_ID);
             ServiceComponentList recuento_plaquetas = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.RECUENTO_PLAQUETAS_ID);
             ServiceComponentList reticulocitos = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.RETICULOCITOS_ID);
@@ -3173,7 +3175,7 @@ namespace NetPdf
 
             if (hemograma != null || hemogramaMAN != null || tiempo_coagulacion_sangria != null || tiempo_protombina_inr != null || tiempo_tromboplastina != null || grupo_factor != null
                 || hemoglobina_hematocrito != null || constantes_corpusculares != null || recuento_plaquetas != null || reticulocitos != null ||
-                velocidad_Sedimentacion != null || perfil_coagulacion != null)
+                velocidad_Sedimentacion != null || perfil_coagulacion != null || hemoglobina != null)
             {
                 //document.Open();
 
@@ -3335,6 +3337,27 @@ namespace NetPdf
                         new PdfPCell(new Phrase(HA_HEMATOCRITO_VALOR_DESEABLE_valor_deseable, fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                         new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                      };
+
+                    columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (hemoglobina != null)
+                {
+                    var HA_HEMOGLOBINA_VALOR_valor = hemoglobina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_AS_VALOR) == null ? "- - -" : hemoglobina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_AS_VALOR).v_Value1;
+                    var HA_HEMOGLOBINA_VALOR_valor_unidad = hemoglobina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_AS_VALOR) == null ? "- - -" : hemoglobina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_AS_VALOR).v_MeasurementUnitName;
+                    var HA_HEMOGLOBINA_VALOR_valor_deseable = hemoglobina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_AS_VALOR_DESEABLE) == null ? "- - -" : hemoglobina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_AS_VALOR_DESEABLE).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("HEMOGLOBINA:", fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HA_HEMOGLOBINA_VALOR_valor, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HA_HEMOGLOBINA_VALOR_valor_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HA_HEMOGLOBINA_VALOR_valor_deseable, fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                    };
 
                     columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
                     table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);

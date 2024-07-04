@@ -2709,6 +2709,14 @@ namespace Sigesoft.Common
         public const string HH_HEMATOCRITO_VALOR_DESEABLE = "N009-MF000005791";
         #endregion
 
+        #region HEMOGLOBINA - LAB
+        public const string HEMOGLOBINA_ID_aS = "N010-ME000000291";
+        public const string HEMOGLOBINA_AS_VALOR = "N009-MF000007242";
+        public const string HEMOGLOBINA_AS_VALOR_DESEABLE = "N009-MF000007243";
+       
+        #endregion
+
+
         #region CONSTANTES CORPUSCULARES - LAB
         public const string CONSTANTES_CORPUSCULARES_ID = "N022-ME000000427";
         public const string CC_VOLUMEN_CORPUSCULAR_VALOR = "N009-MF000005835";

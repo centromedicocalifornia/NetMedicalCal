@@ -95,6 +95,8 @@ namespace NetPdf
             ServiceComponentList colesterol_vldl = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.COLESTEROL_VLDL_ID_ASIST);
             ServiceComponentList trigliceridos = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TRIGLICERIDOS_ID);
             ServiceComponentList creatinina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.CREATININA_ID_ASIST);
+            ServiceComponentList creatinina_orina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.CREATININA_ORINA_ID_ASIST);
+
             ServiceComponentList urea = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.UREA_ID);
             ServiceComponentList acido_urico = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.ACIDO_URICO_ID);
             ServiceComponentList transaminasa_tgo = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TRANSAMINASAS_TGO_ID);
@@ -109,11 +111,14 @@ namespace NetPdf
             ServiceComponentList perfil_lipidico = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PERFIL_LIPIDICO_ID);
             ServiceComponentList perfil_hepatico = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PERFIL_HEPATICO_ID_ASIST);
 
+            ServiceComponentList microalbuminuria = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.MICROALBUMINURIA_AS_ID);
+
+
             if (glucosa_basal != null || glucosa_post_prandial != null || tolerancia_glucosa != null || colesterol_total != null || colesterol_hdl != null ||
-                colesterol_ldl != null || colesterol_vldl != null || trigliceridos != null || creatinina != null || urea != null ||
+                colesterol_ldl != null || colesterol_vldl != null || trigliceridos != null || creatinina != null || creatinina_orina != null || urea != null ||
                 acido_urico != null || transaminasa_tgo != null || transaminasa_tgp != null || fosfatasa_alcalina != null || bilirrubina_total_fraccionada != null ||
                 proteina_total_fraccionada != null || amilasa != null || lipasa != null || gamma_glutamil != null || ldh != null || perfil_lipidico != null ||
-                perfil_hepatico != null)
+                perfil_hepatico != null || microalbuminuria != null)
             {
 
                 document.NewPage();
@@ -499,6 +504,29 @@ namespace NetPdf
                     document.Add(table);
                 }
 
+                if (creatinina_orina != null)
+                {
+                    var CREATININA_ORINA_VALOR = creatinina_orina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CREATININA_ORINA_VALOR) == null ? "- - -" : creatinina_orina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CREATININA_ORINA_VALOR).v_Value1;
+                    var CREATININA_ORINA_VALOR_unidad = creatinina_orina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CREATININA_ORINA_VALOR) == null ? "- - -" : creatinina_orina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CREATININA_ORINA_VALOR).v_MeasurementUnitName;
+                    var CREATININA_ORINA_VALOR_DESEABLE = creatinina_orina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CREATININA_ORINA_VALOR_DESEABLE) == null ? "- - -" : creatinina_orina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CREATININA_ORINA_VALOR_DESEABLE).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+
+                        new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("CREATININA EN ORINA (MÉTODO : Jaffe Cinético y Compensado):", fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CREATININA_ORINA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CREATININA_ORINA_VALOR_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CREATININA_ORINA_VALOR_DESEABLE, fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_LEFT, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                     };
+
+                    columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
                 if (urea != null)
                 {
                     var urea_valor = urea.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.UREA_VALOR) == null ? "- - -" : urea.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.UREA_VALOR).v_Value1;
@@ -795,6 +823,30 @@ namespace NetPdf
                     table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
                     document.Add(table);
                 }
+
+                if (microalbuminuria != null)
+                {
+                    var MICROALBUMINURIA_VALOR = microalbuminuria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.MICROALBUMINURIA_VALOR) == null ? "- - -" : microalbuminuria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.MICROALBUMINURIA_VALOR).v_Value1;
+                    var MICROALBUMINURIA_VALOR_unidad = microalbuminuria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.MICROALBUMINURIA_VALOR) == null ? "- - -" : microalbuminuria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.MICROALBUMINURIA_VALOR).v_MeasurementUnitName;
+                    var MICROALBUMINURIA_DESEABLE = microalbuminuria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.MICROALBUMINURIA_DESEABLE) == null ? "- - -" : microalbuminuria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.MICROALBUMINURIA_DESEABLE).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+
+                        new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("MICROALBUMINURIA :", fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(MICROALBUMINURIA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(MICROALBUMINURIA_VALOR_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(MICROALBUMINURIA_DESEABLE, fontColumnValue)) { Colspan = 6, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValueBold)) { Colspan = 1, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                     };
+
+                    columnWidths = new float[] { 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
 
                 if (perfil_lipidico != null)
                 {

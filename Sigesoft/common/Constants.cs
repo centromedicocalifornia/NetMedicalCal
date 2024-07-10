@@ -2210,6 +2210,12 @@ namespace Sigesoft.Common
         public const string CREATININA_VALOR_DESEABLE = "N009-MF000005600";
         #endregion
 
+        #region CREATININA ORINA - LAB
+        public const string CREATININA_ORINA_ID_ASIST = "N009-ME000000743";
+        public const string CREATININA_ORINA_VALOR = "N009-MF000007346";
+        public const string CREATININA_ORINA_VALOR_DESEABLE = "N009-MF000007347";
+        #endregion
+
         #region UREA - LAB
         public const string UREA_ID = "N009-ME000000509";
         public const string UREA_VALOR = "N009-MF000004363";
@@ -2413,6 +2419,12 @@ namespace Sigesoft.Common
         public const string VAL_ELECTROLITOS_Ca_Pos_7_4_v = "N009-MF000006287";
         public const string VAL_ELECTROLITOS_CI_Pos_v = "N009-MF000006289";
         public const string VAL_ELECTROLITOS_CI_Pos_v_d = "N009-MF000006290";
+        #endregion
+
+        #region MICROALBUMINURIA - LAB
+        public const string MICROALBUMINURIA_AS_ID = "N009-ME000000954";
+        public const string MICROALBUMINURIA_VALOR = "N009-MF000007344";
+        public const string MICROALBUMINURIA_DESEABLE = "N009-MF000007345";
         #endregion
         #endregion
 

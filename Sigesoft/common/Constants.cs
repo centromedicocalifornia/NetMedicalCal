@@ -2593,8 +2593,19 @@ namespace Sigesoft.Common
         public const string PERFIL_TIROIDEO_TSH_VALOR_DESEABLE = "N009-MF000005639";
         public const string PERFIL_TIROIDEO_T4_VALOR = "N009-MF000005640";
         public const string PERFIL_TIROIDEO_T4_VALOR_DESEABLE = "N009-MF000005641";
+
+        public const string PERFIL_TIROIDEO_T4_LIBRE_VALOR = "N009-MF000007348";
+        public const string PERFIL_TIROIDEO_T4_LIBRE_VALOR_DESEABLE = "N009-MF000007349";
+
         public const string PERFIL_TIROIDEO_T3_VALOR = "N009-MF000005642";
         public const string PERFIL_TIROIDEO_T3_VALOR_DESEABLE = "N009-MF000005643";
+        #endregion
+
+        #region INSULINA - LAB
+        public const string INSULINA_ID = "N009-ME000000921";
+        public const string INSULINA_VALOR = "N009-MF000007350";
+        public const string INSULINA_VALOR_DESEABLE = "N009-MF000007351";
+       
         #endregion
         #endregion
 

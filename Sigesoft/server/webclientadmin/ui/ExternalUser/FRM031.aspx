@@ -18,46 +18,37 @@
     </style>
 </head>
 <body>
-    <%--<div class="w3-row w3-border">
-          <div class="w3-container w3-half w3-red">
-            <h2>w3-half</h2>  
-            <p>The w3-half class uses 50% of the parent container.</p>
-            <p>On screens smaller than 601 pixels it resizes to 100%.</p>
-          </div>
-          <div class="w3-container w3-half">
-            <h2>w3-half</h2>  
-          </div>
-        </div>--%>
-   <form id="form1" runat="server">      
+   <form id="form1" runat="server" >      
        <div>
            <asp:GridView ID="GridViewEjemplo" runat="server"  Visible="true"></asp:GridView>
-           <asp:Button ID="Button1" runat="server" Text="Exportar a Excel" class="button" Icon="PageExcel" OnClick="btnExcel_Click"/>
+           <asp:Button ID="Button1" runat="server" Text="  Exportar a Excel  " class="button" Icon="PageExcel" OnClick="btnExcel_Click"/>
            <asp:Label runat="server" Text="PARA REALIZAR LA DESCARGA, PRIMERO DEBE FILTRAR LA INFORMACIÓN" Font-Bold="True" Font-Italic="True" ></asp:label>
        </div>   
-    <x:Pagemanager ID="PageManager1" runat="server" AutoSizePanelID="Panel1" />
+    <x:Pagemanager ID="PageManager1" runat="server" AutoSizePanelID="Panel1"  />
      <x:Panel ID="Panel1" runat="server"  ShowBorder="True" ShowHeader="True" Title="Administrador de Servicios" EnableBackgroundColor="true" Layout="VBox" 
-          BoxConfigAlign="Stretch" BoxConfigPosition="Start" BoxConfigChildMargin="3 7 12 5" >
+          BoxConfigAlign="Stretch" BoxConfigPosition="Start" BoxConfigChildMargin="3 7 12 5" AutoWidth ="true" AutoScroll="true" >
          
          <Items>
-            <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" Height="132" AutoHeight="true" >                
+            <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" Height="140" AutoHeight="true" AutoScroll="true" Layout="Fit">    
+                 
                 <Items>
-                    <x:Form ID="Form2" runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left" AutoHeight="true">
+                    <x:Form ID="Form2" runat="server" EnableBackgroundColor="true" ShowBorder="true" ShowHeader="false" LabelWidth="90px" LabelAlign="Left" AutoHeight="true">
                             <Rows>
-                                <x:FormRow ColumnWidths="460px 460px 100px" runat="server">
+                                <x:FormRow ColumnWidths="200px 200px 100px" runat="server">
                                     <Items> 
                                         <x:Form ID="Form3"   runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left">
                                             <Rows>
-                                                <x:FormRow ColumnWidths="230px 230px" runat="server" >
+                                                <x:FormRow ColumnWidths="230px 200px" runat="server" >
                                                     <Items>
                                                         <x:DatePicker ID="dpFechaInicio" Label="Atenciones del" Width="120px" runat="server" DateFormatString="dd/MM/yyyy" />
-                                                        <x:DatePicker ID="dpFechaFin" Label="Al"  runat="server" Width="120px" DateFormatString="dd/MM/yyyy" />                                       
+                                                        <x:DatePicker ID="dpFechaFin" Label="Al"  runat="server" Width="100px" DateFormatString="dd/MM/yyyy" />                                       
                                                     </Items>
                                                 </x:FormRow>
                                             </Rows>
                                         </x:Form>
                                         <x:Form ID="Form6"  runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="70px" LabelAlign="Left">
                                             <Rows>
-                                                <x:FormRow ColumnWidths="215px 245px"  ID="FormRow5" runat="server" >
+                                                <x:FormRow ColumnWidths="200px 200px"  ID="FormRow5" runat="server" >
                                                     <Items>
                                                          <x:DropDownList ID="ddlTipoESO" Label="Tipo ESO" runat="server" />
                                                         <x:DropDownList ID="ddlAptitud" Label="Aptitud" runat="server" />
@@ -65,7 +56,6 @@
                                                 </x:FormRow>
                                             </Rows>
                                         </x:Form>
-                                         <x:Button ID="btnFilter" Text="Filtrar" Icon="Find" IconAlign="Left" runat="server" AjaxLoadingType="Mask" CssClass="inline" OnClick="btnFilter_Click" ValidateForms="Form2" ></x:Button>                         
                                     </Items>
                                 </x:FormRow>
                                 <x:FormRow ID="FormRow2" ColumnWidths="460px 460px"  runat="server">
@@ -88,7 +78,8 @@
                                                 </x:FormRow>
                                             </Rows>
                                         </x:Form> 
-                                       
+                                    <x:Button ID="btnFilter" Text="--Filtrar--" Icon="Find" IconAlign="Left" runat="server" OnClick="btnFilter_Click"  ValidateForms="Form2"  ></x:Button>                         
+
                                     </Items>
                                 </x:FormRow>
                                 <x:FormRow ColumnWidths="460px 460px" ID="FormRow1"  runat="server">
@@ -118,7 +109,8 @@
                                 </x:FormRow>
                                 <x:FormRow  ColumnWidths="840px 100px" ID="FormRow6"  runat="server">
                                     <Items>
-                                            <x:Label runat="server" ID="lblContador" Text="Se encontraron 0 registros" Width="800px" CssClass="StylelblContador"></x:Label>                                         
+                                    <x:Label runat="server" ID="lblContador" Text="Se encontraron 0 registros" Width="800px" CssClass="StylelblContador"></x:Label>                                         
+
                                     </Items> 
                                 </x:FormRow>
                             </Rows> 
@@ -129,15 +121,16 @@
              EnableRowNumber="True" EnableRowNumberPaging="true" AutoHeight="true" RowNumberWidth="40" AjaxLoadingType="Default"
             EnableMouseOverColor="true" ShowGridHeader="true"   DataKeyNames="v_ServiceId,v_IdTrabajador,EmpresaCliente,v_Trabajador,Dni,i_SendToTracking,Apellidos" 
             EnableTextSelection="true" EnableAlternateRowColor="true" EnableCheckBoxSelect="true" BoxFlex="2" BoxMargin="5" 
-            OnRowCommand="grdData_RowCommand"  OnRowClick="grdData_RowClick">
+            OnRowCommand="grdData_RowCommand"  OnRowClick="grdData_RowClick" AutoScroll="true">
                 <Toolbars>
                     <x:Toolbar ID="Toolbar1" runat="server">
                         <Items>
+                            <x:Button ID="btnNewFichaOcupacional" Text="Ficha Ocupacional" Icon="clipboard" runat="server" Enabled="false" ></x:Button>
                             <x:Button ID="btnNewCertificado" Text="Certificado" Icon="PageWhiteText" runat="server" Enabled="false"></x:Button>
                             <x:Button ID="btnExAltura" Text="Test de Altura" Icon="PageWhiteText" runat="server" Enabled="false"></x:Button>
                             <x:Button ID="btnPsico" Text="Psicologia" Icon="PageWhiteText" runat="server" Enabled="true"></x:Button>
                             <x:Button ID="btnToxi" Text="Toxicológico" Icon="Folder" runat="server" Enabled="false"></x:Button>
-                            <x:Button ID="btnNewFichaOcupacional" Text="Ficha Ocupacional" Icon="clipboard" runat="server" Enabled="false" ></x:Button>
+                            
                             <x:Button ID="btnNewExamenes" Text="Examenes" Icon="PageWhiteStack" runat="server" Enabled="false" Visible="false"></x:Button>
                             <x:Button ID="btnFMT1" Text="Informe Médico" Icon="FilmAdd" runat="server" Enabled="false" ></x:Button>
                             <x:Button ID="btnInterConsulta" Text="Interconsulta" Icon="FilmEject" runat="server" Enabled="false" ></x:Button>

@@ -139,15 +139,6 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser {
         protected global::FineUI.DropDownList ddlAptitud;
         
         /// <summary>
-        /// Control btnFilter.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::FineUI.Button btnFilter;
-        
-        /// <summary>
         /// Control FormRow2.
         /// </summary>
         /// <remarks>
@@ -209,6 +200,15 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::FineUI.DropDownList ddlEmpresa;
+        
+        /// <summary>
+        /// Control btnFilter.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::FineUI.Button btnFilter;
         
         /// <summary>
         /// Control FormRow1.
@@ -310,6 +310,15 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser {
         protected global::FineUI.Toolbar Toolbar1;
         
         /// <summary>
+        /// Control btnNewFichaOcupacional.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::FineUI.Button btnNewFichaOcupacional;
+        
+        /// <summary>
         /// Control btnNewCertificado.
         /// </summary>
         /// <remarks>
@@ -344,15 +353,6 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::FineUI.Button btnToxi;
-        
-        /// <summary>
-        /// Control btnNewFichaOcupacional.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::FineUI.Button btnNewFichaOcupacional;
         
         /// <summary>
         /// Control btnNewExamenes.

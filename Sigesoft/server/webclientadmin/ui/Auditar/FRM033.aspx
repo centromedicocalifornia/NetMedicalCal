@@ -10,10 +10,12 @@
     <form id="form1" runat="server">
       <x:PageManager ID="PageManager1" runat="server" />
     <x:Panel ID="Panel2" runat="server" Height="1420px" Width="1300px" ShowBorder="False"
-        Layout="Table" TableConfigColumns="1" ShowHeader="False" Title="Panel (Height=3300px Width=760px Layout=Table)" AutoScroll="true">
+        Layout="Table" TableConfigColumns="1" ShowHeader="False" 
+        Title="Panel (Height=3300px Width=760px Layout=Table)" AutoScroll="true">
         <Items>
             <x:Panel ID="Panel1" Title="Buscar Servicio" Width="1125px" Height="450px" EnableBackgroundColor="true"
-                TableRowspan="1" runat="server" BodyPadding="5px" ShowBorder="true" ShowHeader="true" BoxConfigAlign="Stretch" AutoScroll="true">
+                TableRowspan="1" runat="server" BodyPadding="5px" ShowBorder="true" ShowHeader="true" BoxConfigAlign="Stretch" 
+                AutoScroll="true">
                   <Items>
                         <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" BoxFlex="1" Height="90px" >                
                             <Items>

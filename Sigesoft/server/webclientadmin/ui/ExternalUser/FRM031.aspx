@@ -18,6 +18,16 @@
     </style>
 </head>
 <body>
+    <%--<div class="w3-row w3-border">
+          <div class="w3-container w3-half w3-red">
+            <h2>w3-half</h2>  
+            <p>The w3-half class uses 50% of the parent container.</p>
+            <p>On screens smaller than 601 pixels it resizes to 100%.</p>
+          </div>
+          <div class="w3-container w3-half">
+            <h2>w3-half</h2>  
+          </div>
+        </div>--%>
    <form id="form1" runat="server">      
        <div>
            <asp:GridView ID="GridViewEjemplo" runat="server"  Visible="true"></asp:GridView>
@@ -29,9 +39,9 @@
           BoxConfigAlign="Stretch" BoxConfigPosition="Start" BoxConfigChildMargin="3 7 12 5" >
          
          <Items>
-            <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" BoxFlex="1" Height="132" >                
+            <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" Height="132" AutoHeight="true" >                
                 <Items>
-                    <x:Form ID="Form2" runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left">
+                    <x:Form ID="Form2" runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left" AutoHeight="true">
                             <Rows>
                                 <x:FormRow ColumnWidths="460px 460px 100px" runat="server">
                                     <Items> 
@@ -111,7 +121,7 @@
                                             <x:Label runat="server" ID="lblContador" Text="Se encontraron 0 registros" Width="800px" CssClass="StylelblContador"></x:Label>                                         
                                     </Items> 
                                 </x:FormRow>
-                            </Rows>
+                            </Rows> 
                     </x:Form>
                 </Items>
             </x:GroupPanel>
@@ -119,7 +129,7 @@
              EnableRowNumber="True" EnableRowNumberPaging="true" AutoHeight="true" RowNumberWidth="40" AjaxLoadingType="Default"
             EnableMouseOverColor="true" ShowGridHeader="true"   DataKeyNames="v_ServiceId,v_IdTrabajador,EmpresaCliente,v_Trabajador,Dni,i_SendToTracking,Apellidos" 
             EnableTextSelection="true" EnableAlternateRowColor="true" EnableCheckBoxSelect="true" BoxFlex="2" BoxMargin="5" 
-            OnRowCommand="grdData_RowCommand"  OnRowClick="grdData_RowClick" EnableRowClick="true">
+            OnRowCommand="grdData_RowCommand"  OnRowClick="grdData_RowClick">
                 <Toolbars>
                     <x:Toolbar ID="Toolbar1" runat="server">
                         <Items>
@@ -142,10 +152,14 @@
                         DataWindowTitleField="v_Value1" DataWindowTitleFormatString="Archivos Adjuntos" />
                     <x:boundfield Width="140px" DataField="v_ServiceId" DataFormatString="{0}" HeaderText="Id Atencion" />
                     <x:boundfield Width="270px" DataField="v_Trabajador" DataFormatString="{0}" HeaderText="Trabajador" />
-                    <x:boundfield Width="150px" DataField="d_ServiceDate" DataFormatString="{0:d}" HeaderText="Fecha" />
-                    <x:boundfield Width="200px" DataField="v_AptitudeStatusName" DataFormatString="{0}" HeaderText="Aptitud" />
+                    <x:boundfield Width="60px" DataField="Edad" DataFormatString="{0}" HeaderText="Edad" />  
+                    <x:boundfield Width="100px" DataField="Sexo" DataFormatString="{0}" HeaderText="Sexo" />
+                    <x:boundfield Width="100px" DataField="d_ServiceDate" DataFormatString="{0:d}" HeaderText="Fecha" />
+                    <x:boundfield Width="100px" DataField="v_AptitudeStatusName" DataFormatString="{0}" HeaderText="Aptitud" />
+                    <x:boundfield Width="350px" DataField="DxFinal" DataFormatString="{0}" HeaderText="DxFinal" /> 
                     <%--<x:boundfield Width="400px" DataField="v_Restricction" DataFormatString="{0}" HeaderText="Restricciones" />--%>
-                    <x:boundfield Width="250px" DataField="v_ProtocolName" DataFormatString="{0}" HeaderText="Protocolo" />                   
+                    <x:boundfield Width="250px" DataField="v_ProtocolName" DataFormatString="{0}" HeaderText="TIPO ESO" />    
+                                
                 </Columns>
             </x:Grid>
         </Items>

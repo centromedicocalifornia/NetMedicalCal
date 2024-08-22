@@ -55,7 +55,7 @@
     </Reference>
     <Reference Include="FineUIPro, Version=6.3.0.0, Culture=neutral, PublicKeyToken=9cbe753c029f291a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\FineUIPro.dll</HintPath>
+      <HintPath>..\..\..\packages\FineUIPro.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\..\..\..\..\SLSigesoftClinicaInternacional\ExternalLibraries\itextsharp.dll</HintPath>

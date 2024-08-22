@@ -87,6 +87,14 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser
             column = new DataColumn();
             column.ColumnName = "Trabajador";
             table.Columns.Add(column);
+            
+            column = new DataColumn();
+            column.ColumnName = "Edad";
+            table.Columns.Add(column);
+
+            column = new DataColumn();
+            column.ColumnName = "Sexo";
+            table.Columns.Add(column);
 
             column = new DataColumn();
             column.ColumnName = "Fecha";
@@ -94,6 +102,10 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser
 
             column = new DataColumn();
             column.ColumnName = "Aptitud";
+            table.Columns.Add(column);
+
+            column = new DataColumn();
+            column.ColumnName = "DxFinal";
             table.Columns.Add(column);
 
             column = new DataColumn();
@@ -106,8 +118,11 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser
                 row = table.NewRow();
                 row["Id"] = item.v_ServiceId;
                 row["Trabajador"] = item.v_Trabajador;
+                row["Edad"] = item.v_Trabajador;
+                row["Sexo"] = item.v_Trabajador;
                 row["Fecha"] = item.d_ServiceDate;
                 row["Aptitud"] = item.v_AptitudeStatusName;
+                row["DxFinal"] = item.DxFinal;
                 row["EMO"] = item.v_ProtocolName;
                 empresa = item.EmpresaCliente;
                 table.Rows.Add(row);

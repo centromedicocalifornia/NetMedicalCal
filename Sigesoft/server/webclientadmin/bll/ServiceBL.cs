@@ -2152,6 +2152,15 @@ namespace Sigesoft.Server.WebClientAdmin.BLL
 
        }
 
+       public int GetAgeService(DateTime FechaNacimiento, DateTime FechaServicio)
+       {
+           var diff = FechaServicio - FechaNacimiento;
+           return (int)(diff.TotalDays / 365.255);
+
+           //return int.Parse((DateTime.Today.AddTicks(-FechaNacimiento.Ticks).Year - 1).ToString());
+
+       }
+
        public string GetCantidadCaries(string pstrServiceId, string pstrComponentId, string pstrFieldId)
        {
            try
@@ -21849,7 +21858,10 @@ namespace Sigesoft.Server.WebClientAdmin.BLL
                                 v_CustomerOrganizationId = E.v_OrganizationId,
                                 Dni = H.v_DocNumber,
                                 i_SendToTracking = F.i_SendToTracking.Value,
-                                Apellidos = H.v_FirstLastName + " " + H.v_SecondLastName
+                                Apellidos = H.v_FirstLastName + " " + H.v_SecondLastName,
+                                Sexo = H.i_SexTypeId == 1 ? "MASCULINO" : "FEMENINO",
+                                d_FechaNacimiento = H.d_Birthdate.Value,
+
                             };
 
 
@@ -21869,6 +21881,7 @@ namespace Sigesoft.Server.WebClientAdmin.BLL
 
                 var query1 = (from A in query.ToList()
                               //let x = GetRestricctionByServiceId(A.v_ServiceId)
+                              let x = ConcatenateDxFinales(A.v_ServiceId)
                               select new ServiceList
                               {
                                   v_ServiceId = A.v_ServiceId,
@@ -21886,7 +21899,10 @@ namespace Sigesoft.Server.WebClientAdmin.BLL
                                   //v_Restricction = x,
                                   Dni = A.Dni,
                                   i_SendToTracking = A.i_SendToTracking,
-                                  Apellidos = A.Apellidos
+                                  Apellidos = A.Apellidos,
+                                  Edad = GetAgeService(A.d_FechaNacimiento.Value, A.d_ServiceDate),
+                                  Sexo = A.Sexo,
+                                  DxFinal = x
                               }).ToList();
 
 
@@ -21895,7 +21911,7 @@ namespace Sigesoft.Server.WebClientAdmin.BLL
                          .GroupBy(x => x.v_ServiceId)
                          .Select(group => group.First());
 
-                List<ServiceList> objData1 = objData.ToList();
+                List<ServiceList> objData1 = objData.OrderBy(x => x.d_ServiceDate).OrderBy(x => x.v_Trabajador).ToList();
                 pobjOperationResult.Success = 1;
                 return objData1;
             }
@@ -21907,7 +21923,22 @@ namespace Sigesoft.Server.WebClientAdmin.BLL
             }
         }
 
+        private string ConcatenateDxFinales(string servicioId)
+        {
+            SigesoftEntitiesModel dbContext = new SigesoftEntitiesModel();
 
+            var qry = (from a in dbContext.diagnosticrepository  
+                       join eee in dbContext.diseases on a.v_DiseasesId equals eee.v_DiseasesId
+                       where a.v_ServiceId == servicioId &&
+                       a.i_IsDeleted == 0 && (a.i_FinalQualificationId == (int)FinalQualification.Definitivo ||
+                                  a.i_FinalQualificationId == (int)FinalQualification.Presuntivo)
+                       select new
+                       {
+                           DxName = eee.v_Name
+                       }).ToList();
+
+            return string.Join(" | ", qry.Select(p => p.DxName));
+        }
         public List<ServiceList> GetServicesForExternalUser(int i_SystemUserId)
         {
             ConexionSigesoft conexion = new ConexionSigesoft();

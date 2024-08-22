@@ -2357,6 +2357,8 @@ namespace Sigesoft.Common
         public const string PH_BILIRRUBINA_DIRECTA_v_d = "N009-MF000005785";
         public const string PH_BILIRRUBINA_INDIRECTA_v = "N009-MF000005786";
         public const string PH_BILIRRUBINA_INDIRECTA_v_d = "N009-MF000005787";
+        public const string PH_GGT_v = "N009-MF000007352";
+        public const string PH_GGT_v_d = "N009-MF000007353";
         #endregion
 
         #region GASES ARTERIALES

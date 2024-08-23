@@ -10201,7 +10201,7 @@
     <Content Include="res\third-party\umeditor\third-party\mathquill\font\Symbola.otf" />
     <Content Include="res\third-party\umeditor\third-party\mathquill\font\Symbola.ttf" />
     <Content Include="res\third-party\umeditor\third-party\mathquill\font\Symbola.woff" />
-    <None Include="Properties\PublishProfiles\WEB.pubxml" />
+    <None Include="Properties\PublishProfiles\WEB_TRUJILLO.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

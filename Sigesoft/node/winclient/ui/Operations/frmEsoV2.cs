@@ -183,17 +183,17 @@ namespace Sigesoft.Node.WinClient.UI.Operations
             }
 
 
-            if (personData.v_CustomerOrganizationId == "N009-OO000000587" || personData.v_EmployerOrganizationId == "N009-OO000000587" || personData.v_WorkingOrganizationId == "N009-OO000000587" || personData.v_CustomerOrganizationId == "N002-OO000000717" || personData.v_EmployerOrganizationId == "N002-OO000000717" || personData.v_WorkingOrganizationId == "N002-OO000000717")
-            {
+            //if (personData.v_CustomerOrganizationId == "N009-OO000000587" || personData.v_EmployerOrganizationId == "N009-OO000000587" || personData.v_WorkingOrganizationId == "N009-OO000000587" || personData.v_CustomerOrganizationId == "N002-OO000000717" || personData.v_EmployerOrganizationId == "N002-OO000000717" || personData.v_WorkingOrganizationId == "N002-OO000000717")
+            //{
                 checkFirmaYanacocha.Visible = true;
                 checkFirmaYanacocha.Enabled = true;
 
-            }
-            else
-            {
-                checkFirmaYanacocha.Visible = false;
-                checkFirmaYanacocha.Enabled = false;
-            }
+            //}
+            //else
+            //{
+            //    checkFirmaYanacocha.Visible = false;
+            //    checkFirmaYanacocha.Enabled = false;
+            //}
             splitContainer2.SplitterDistance = splitContainer2.Height - 200;
         }
 

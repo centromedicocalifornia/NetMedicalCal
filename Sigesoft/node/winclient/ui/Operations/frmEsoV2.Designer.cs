@@ -1008,11 +1008,11 @@
             this.checkFirmaYanacocha.AutoSize = true;
             this.checkFirmaYanacocha.Font = new System.Drawing.Font("Calibri", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkFirmaYanacocha.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.checkFirmaYanacocha.Location = new System.Drawing.Point(1005, 503);
+            this.checkFirmaYanacocha.Location = new System.Drawing.Point(1005, 511);
             this.checkFirmaYanacocha.Name = "checkFirmaYanacocha";
-            this.checkFirmaYanacocha.Size = new System.Drawing.Size(121, 34);
+            this.checkFirmaYanacocha.Size = new System.Drawing.Size(109, 19);
             this.checkFirmaYanacocha.TabIndex = 111;
-            this.checkFirmaYanacocha.Text = "Firma Yanacocha \r\n   (Dra. Rocío)";
+            this.checkFirmaYanacocha.Text = "Firma AUDITOR";
             this.checkFirmaYanacocha.UseVisualStyleBackColor = true;
             // 
             // dptDateGlobalExp

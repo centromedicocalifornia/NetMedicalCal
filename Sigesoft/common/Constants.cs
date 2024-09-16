@@ -3111,6 +3111,13 @@ namespace Sigesoft.Common
         public const string ALCOHOL_EN_SALIBA_VALOR = "N009-MF000005874";
         #endregion
 
+        #region PLOMO EN SANGRE
+        public const string TOX_PLOMO_SANGRE_ID = "N009-ME000000992";
+        public const string TOX_PLOMO_SANGRE_VALOR = "N009-MF000007354";
+        public const string TOX_PLOMO_SANGRE_VALOR_dESEABLE = "N009-MF000007355";
+
+        #endregion
+
         #endregion
 
         #region PRE OPERATORIO

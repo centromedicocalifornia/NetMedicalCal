@@ -8576,7 +8576,7 @@ namespace Sigesoft.Node.WinClient.BLL
                     if (firma_Yana == true)
                     {
                         objService.d_UpdateDateOccupationalMedical = DateTime.Now;
-                        objService.i_UpdateUserOccupationalMedicaltId = 410;
+                        objService.i_UpdateUserOccupationalMedicaltId = 175;
                     }
                     else
                     {

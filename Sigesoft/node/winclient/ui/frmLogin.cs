@@ -307,6 +307,11 @@ namespace Sigesoft.Node.WinClient.UI
 
         }
 
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
   

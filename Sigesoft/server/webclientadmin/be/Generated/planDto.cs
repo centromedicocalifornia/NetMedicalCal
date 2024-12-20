@@ -43,11 +43,17 @@ namespace Sigesoft.Server.WebClientAdmin.BE
         [DataMember()]
         public String v_ComentaryUpdate { get; set; }
 
+        [DataMember()]
+        public Nullable<Decimal> d_ImporteFarComercial { get; set; }
+
+        [DataMember()]
+        public Nullable<Decimal> d_ImporteFarGenerico { get; set; }
+
         public planDto()
         {
         }
 
-        public planDto(Int32 i_PlanId, String v_OrganizationSeguroId, String v_ProtocoloId, String v_IdUnidadProductiva, Nullable<Int32> i_EsDeducible, Nullable<Int32> i_EsCoaseguro, Nullable<Decimal> d_Importe, Nullable<Decimal> d_ImporteCo, String v_ComentaryUpdate)
+        public planDto(Int32 i_PlanId, String v_OrganizationSeguroId, String v_ProtocoloId, String v_IdUnidadProductiva, Nullable<Int32> i_EsDeducible, Nullable<Int32> i_EsCoaseguro, Nullable<Decimal> d_Importe, Nullable<Decimal> d_ImporteCo, String v_ComentaryUpdate, Nullable<Decimal> d_ImporteFarComercial, Nullable<Decimal> d_ImporteFarGenerico)
         {
 			this.i_PlanId = i_PlanId;
 			this.v_OrganizationSeguroId = v_OrganizationSeguroId;
@@ -58,6 +64,9 @@ namespace Sigesoft.Server.WebClientAdmin.BE
 			this.d_Importe = d_Importe;
 			this.d_ImporteCo = d_ImporteCo;
 			this.v_ComentaryUpdate = v_ComentaryUpdate;
+            this.d_ImporteFarComercial = d_ImporteFarComercial;
+            this.d_ImporteFarGenerico = d_ImporteFarGenerico;
+
         }
     }
 }

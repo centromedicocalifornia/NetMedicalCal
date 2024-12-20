@@ -57,5 +57,15 @@ namespace Sigesoft.Node.WinClient.BE
 
         public string USUARIO_MED { get; set; }
         public string ESPECIALIDAD_MED { get; set; }
+
+        public string TipoConvenio { get; set; }
+        public string Aumento_Insumos { get; set; }
+        public string CoaseguroFarmaciaComercial { get; set; }
+        public string CoaseguroFarmaciaGenerico { get; set; }
+        public string ConvenioFijado { get; set; }
+        public string Convenio_S { get; set; }
+        public string Consulta_MG { get; set; }
+        public string Consulta_Esp { get; set; }
+
     }
 }

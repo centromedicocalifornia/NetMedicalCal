@@ -15297,7 +15297,13 @@ namespace Sigesoft.Node.WinClient.BLL
                 "pr.v_Name as 'Protocolo' ,  " +
                 "(SELECT TOP 1 pp.v_FirstName+', '+pp.v_FirstLastName+' '+pp.v_SecondLastName FROM servicecomponent as sc " +
                 " JOIN systemuser as su on sc.i_MedicoTratanteId = su.i_SystemUserId " +
-                " JOIN person pp on su.v_PersonId=pp.v_PersonId WHERE sc.v_ServiceId = s.v_ServiceId order by sc.v_ComponentId) AS 'Medico' " +
+                " JOIN person pp on su.v_PersonId=pp.v_PersonId WHERE sc.v_ServiceId = s.v_ServiceId order by sc.v_ComponentId) AS 'Medico', " +
+                "CASE WHEN pl.d_ImporteFarGenerico IS NULL THEN '- - -' ELSE CONVERT(DECIMAL(16,2), pl.d_ImporteFarGenerico) END AS 'CoaseguroFarGen', " +
+                "CASE WHEN pl.d_ImporteFarComercial IS NULL THEN '- - -' ELSE CONVERT(DECIMAL(16,2), pl.d_ImporteFarComercial) END AS 'CoaseguroFarCom', " +
+                "CASE WHEN pr.r_DiscountExam IS NULL THEN '- - -' ELSE CONVERT(DECIMAL(16,2), pr.r_DiscountExam) END AS 'Insumos', " +
+                "CASE WHEN pr.v_NombreConvenio IS NULL THEN '- - -' ELSE pr.v_NombreConvenio END AS 'ConvenioFijado' , " +
+                "CASE WHEN pr.r_PrecioConvenio IS NULL THEN 0 ELSE CONVERT(DECIMAL(16,2), pr.r_PrecioConvenio) END AS 'ConvenioFijadoCosto' " +
+
                 "from service as s  " +
                 "JOIN protocol as pr on s.v_ProtocolId = pr.v_ProtocolId  " +
                 "LEFT JOIN [SigesoftDesarrollo_2].dbo.[plan] as pl on s.i_PlanId = pl.i_PlanId  " +
@@ -15319,6 +15325,11 @@ namespace Sigesoft.Node.WinClient.BLL
                 _Seguro.Habitacion = decimal.Parse(lector1.GetValue(8).ToString());
                 _Seguro.Protocolo = lector1.GetValue(9).ToString();
                 _Seguro.Medico = lector1.GetValue(10).ToString();
+                _Seguro.CoaseguroFarGen = decimal.Parse(lector1.GetValue(11).ToString());
+                _Seguro.CoaseguroFarCom = decimal.Parse(lector1.GetValue(12).ToString());
+                _Seguro.Insumos = decimal.Parse(lector1.GetValue(13).ToString());
+                _Seguro.ConvenioFijado = lector1.GetValue(14).ToString();
+                _Seguro.ConvenioFijadoCosto = decimal.Parse(lector1.GetValue(15).ToString());
             }
             lector1.Close();
             conectasam.closesigesoft();

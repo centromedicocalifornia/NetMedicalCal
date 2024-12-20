@@ -34,5 +34,22 @@ namespace Sigesoft.Node.WinClient.UI
             }
         }
 
+        public static IDbConnection GetConnectionSAM
+        {
+            get
+            {
+                return new SqlConnection(ConnectionStringSAM);
+            }
+        }
+
+        private static string ConnectionStringSAM
+        {
+            get
+            {
+                var csConf = ConfigurationManager.ConnectionStrings["ContasolConnectionString"];
+                return csConf != null ? csConf.ConnectionString : string.Empty;
+            }
+        }
+
     }
 }

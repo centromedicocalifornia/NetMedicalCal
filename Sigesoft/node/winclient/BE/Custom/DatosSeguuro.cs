@@ -18,5 +18,16 @@ namespace Sigesoft.Node.WinClient.BE.Custom
         public decimal Habitacion { get; set; }
         public string Protocolo { get; set; }
         public string Medico { get; set; }
+
+        public decimal CoaseguroFarGen { get; set; }
+        public decimal CoaseguroFarCom { get; set; }
+
+        public decimal Insumos { get; set; }
+
+        public string ConvenioFijado { get; set; }
+
+        public decimal ConvenioFijadoCosto { get; set; }
+
+
     }
 }

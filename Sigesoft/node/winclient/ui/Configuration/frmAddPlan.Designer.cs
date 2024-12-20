@@ -51,6 +51,10 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtUnidadProdId = new System.Windows.Forms.TextBox();
+            this.txtCoaseguroGenerico = new System.Windows.Forms.TextBox();
+            this.txtCoaseguroComercial = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cbLine)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,7 +187,7 @@
             // 
             this.btnAgregar.Image = global::Sigesoft.Node.WinClient.UI.Properties.Resources.add;
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(109, 133);
+            this.btnAgregar.Location = new System.Drawing.Point(411, 175);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 126;
@@ -196,7 +200,7 @@
             // 
             this.btnCancelar.Image = global::Sigesoft.Node.WinClient.UI.Properties.Resources.delete;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(379, 133);
+            this.btnCancelar.Location = new System.Drawing.Point(330, 175);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 127;
@@ -207,17 +211,55 @@
             // 
             // txtUnidadProdId
             // 
-            this.txtUnidadProdId.Location = new System.Drawing.Point(354, 107);
+            this.txtUnidadProdId.Location = new System.Drawing.Point(32, 111);
             this.txtUnidadProdId.Name = "txtUnidadProdId";
             this.txtUnidadProdId.Size = new System.Drawing.Size(100, 20);
             this.txtUnidadProdId.TabIndex = 125;
             this.txtUnidadProdId.Visible = false;
             // 
+            // txtCoaseguroGenerico
+            // 
+            this.txtCoaseguroGenerico.Location = new System.Drawing.Point(355, 112);
+            this.txtCoaseguroGenerico.Name = "txtCoaseguroGenerico";
+            this.txtCoaseguroGenerico.Size = new System.Drawing.Size(100, 20);
+            this.txtCoaseguroGenerico.TabIndex = 128;
+            // 
+            // txtCoaseguroComercial
+            // 
+            this.txtCoaseguroComercial.Location = new System.Drawing.Point(354, 138);
+            this.txtCoaseguroComercial.Name = "txtCoaseguroComercial";
+            this.txtCoaseguroComercial.Size = new System.Drawing.Size(100, 20);
+            this.txtCoaseguroComercial.TabIndex = 129;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(167, 115);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(138, 13);
+            this.label3.TabIndex = 130;
+            this.label3.Text = "% paga paciente Genérico: ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(166, 141);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(141, 13);
+            this.label5.TabIndex = 131;
+            this.label5.Text = "% paga paciente Comercial: ";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frmAddPlan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 177);
+            this.ClientSize = new System.Drawing.Size(498, 210);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtCoaseguroComercial);
+            this.Controls.Add(this.txtCoaseguroGenerico);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtUnidadProdId);
@@ -253,5 +295,9 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtUnidadProdId;
+        private System.Windows.Forms.TextBox txtCoaseguroGenerico;
+        private System.Windows.Forms.TextBox txtCoaseguroComercial;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
     }
 }

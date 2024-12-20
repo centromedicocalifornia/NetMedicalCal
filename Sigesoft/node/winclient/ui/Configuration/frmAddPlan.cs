@@ -105,24 +105,28 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
             ObjPlan.i_EsCoaseguro = chkCoaseguro.Checked == true ? 1 : 0;
             ObjPlan.i_EsDeducible = chkDeducible.Checked == true ? 1 : 0;
             ObjPlan.d_ImporteCo = txtCoaseguro.Text == "" ? (decimal?)null : decimal.Parse(txtCoaseguro.Text);
+
+            ObjPlan.d_ImporteFarComercial = txtCoaseguroComercial.Text == "" ? (decimal?)null : decimal.Parse(txtCoaseguroComercial.Text);
+            ObjPlan.d_ImporteFarGenerico = txtCoaseguroGenerico.Text == "" ? (decimal?)null : decimal.Parse(txtCoaseguroGenerico.Text);
+
             #region Conexion SIGESOFT Insert
             
             conectasam.opensigesoft();
             string cadenanull = "";
             if (ObjPlan.d_Importe == null && ObjPlan.d_ImporteCo != null)
             {
-                cadenanull = "INSERT INTO [dbo].[plan] (v_OrganizationSeguroId, v_ProtocoloId, v_IdUnidadProductiva, i_EsDeducible, i_EsCoaseguro, d_Importe, d_ImporteCo) " +
-                             "VALUES ('" + ObjPlan.v_OrganizationSeguroId + "', '" + ObjPlan.v_ProtocoloId + "', '" + ObjPlan.v_IdUnidadProductiva + "', " + ObjPlan.i_EsDeducible + ", " + ObjPlan.i_EsCoaseguro + ", " + "NULL" + ", " + ObjPlan.d_ImporteCo + ")";
+                cadenanull = "INSERT INTO [dbo].[plan] (v_OrganizationSeguroId, v_ProtocoloId, v_IdUnidadProductiva, i_EsDeducible, i_EsCoaseguro, d_Importe, d_ImporteCo, d_ImporteFarComercial, d_ImporteFarGenerico) " +
+                             "VALUES ('" + ObjPlan.v_OrganizationSeguroId + "', '" + ObjPlan.v_ProtocoloId + "', '" + ObjPlan.v_IdUnidadProductiva + "', " + ObjPlan.i_EsDeducible + ", " + ObjPlan.i_EsCoaseguro + ", " + "NULL" + ", " + ObjPlan.d_ImporteCo + ", " + ObjPlan.d_ImporteFarComercial + ", " + ObjPlan.d_ImporteFarGenerico + ")";
             }
             else if (ObjPlan.d_ImporteCo == null && ObjPlan.d_Importe != null)
             {
-                cadenanull = "INSERT INTO [dbo].[plan] (v_OrganizationSeguroId, v_ProtocoloId, v_IdUnidadProductiva, i_EsDeducible, i_EsCoaseguro, d_Importe, d_ImporteCo) " +
-                    "VALUES ('" + ObjPlan.v_OrganizationSeguroId + "', '" + ObjPlan.v_ProtocoloId + "', '" + ObjPlan.v_IdUnidadProductiva + "', " + ObjPlan.i_EsDeducible + ", " + ObjPlan.i_EsCoaseguro + ", " + ObjPlan.d_Importe + ", " + "NULL" + ")";
+                cadenanull = "INSERT INTO [dbo].[plan] (v_OrganizationSeguroId, v_ProtocoloId, v_IdUnidadProductiva, i_EsDeducible, i_EsCoaseguro, d_Importe, d_ImporteCo, d_ImporteFarComercial, d_ImporteFarGenerico) " +
+                    "VALUES ('" + ObjPlan.v_OrganizationSeguroId + "', '" + ObjPlan.v_ProtocoloId + "', '" + ObjPlan.v_IdUnidadProductiva + "', " + ObjPlan.i_EsDeducible + ", " + ObjPlan.i_EsCoaseguro + ", " + ObjPlan.d_Importe + ", " + "NULL" + ", " + ObjPlan.d_ImporteFarComercial + ", " + ObjPlan.d_ImporteFarGenerico + ")";
             }
             else if (ObjPlan.d_ImporteCo != null && ObjPlan.d_Importe != null)
             {
-                cadenanull = "INSERT INTO [dbo].[plan] (v_OrganizationSeguroId, v_ProtocoloId, v_IdUnidadProductiva, i_EsDeducible, i_EsCoaseguro, d_Importe, d_ImporteCo) " +
-                              "VALUES ('" + ObjPlan.v_OrganizationSeguroId + "', '" + ObjPlan.v_ProtocoloId + "', '" + ObjPlan.v_IdUnidadProductiva + "', " + ObjPlan.i_EsDeducible + ", " + ObjPlan.i_EsCoaseguro + ", " + ObjPlan.d_Importe + ", " + ObjPlan.d_ImporteCo + ")";
+                cadenanull = "INSERT INTO [dbo].[plan] (v_OrganizationSeguroId, v_ProtocoloId, v_IdUnidadProductiva, i_EsDeducible, i_EsCoaseguro, d_Importe, d_ImporteCo, d_ImporteFarComercial, d_ImporteFarGenerico) " +
+                              "VALUES ('" + ObjPlan.v_OrganizationSeguroId + "', '" + ObjPlan.v_ProtocoloId + "', '" + ObjPlan.v_IdUnidadProductiva + "', " + ObjPlan.i_EsDeducible + ", " + ObjPlan.i_EsCoaseguro + ", " + ObjPlan.d_Importe + ", " + ObjPlan.d_ImporteCo + ", " + ObjPlan.d_ImporteFarComercial + ", " + ObjPlan.d_ImporteFarGenerico + ")";
             }
             else
             {

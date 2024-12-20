@@ -248,23 +248,20 @@ namespace Sigesoft.Node.WinClient.BLL
 		                WHEN CAST(cd.i_IdFormaPago AS VARCHAR(14))  = '1' AND CAST(cd.i_IdTipoDocumentoRef AS NVARCHAR(14)) = '-1' THEN 'EFECTIVO SOLES' 
 		                WHEN CAST(cd.i_IdFormaPago AS VARCHAR(14))  = '2' AND CAST(cd.i_IdTipoDocumentoRef AS NVARCHAR(14)) = '421' THEN 'VISA' 
 		                 ELSE '- - -' END AS 'Tipo',  
-						 
-						 --(SELECT TOP 1 pp.v_FirstName + ' ' + pp.v_FirstLastName + ' ' + pp.v_SecondLastName   
-					  --              FROM servicecomponent as sc   
-					  --              JOIN systemuser as scm on sc.i_MedicoTratanteId = scm.i_SystemUserId  
-					  --              JOIN person as pp on scm.v_PersonId = pp.v_PersonId  
-					  --              WHERE sc.v_ServiceId = s.v_ServiceId) AS 'Medico'  ,
-
+					
                 CASE WHEN p.v_Procedencia ='H' THEN 'HOSPITALARIO'   
 	                WHEN p.v_Procedencia = 'E' THEN 'EMERGENCIA'  
 	                WHEN p.v_Procedencia = 'A' THEN 'AMBULATORIO '  
 	                ELSE '- - -' END AS 'Procedencia', 
-                CASE WHEN lin.v_Nombre IS NULL THEN '- - -' ELSE lin.v_Nombre END AS 'Plan',  
+                CASE WHEN lin.v_Nombre IS NULL THEN '- - -' ELSE lin.v_Nombre END AS 'Plan', 
+				
                 p.r_PriceFactor as 'Factor' ,
-                CONVERT (varchar,cast(p.r_MedicineDiscount as int)) + '%'  as 'Descuento_PPS' , 
+                CONVERT (varchar,cast(p.r_MedicineDiscount as int)) + '%'  as 'Descuento_PPS' ,
+				
                 CASE WHEN pl.d_Importe IS NULL THEN 'NP' ELSE 'S/.   ' + CONVERT (varchar,cast(pl.d_Importe as money)) END as 'Deducible',   
                 CASE WHEN pl.d_ImporteCo IS NULL THEN 'NP' ELSE CONVERT (varchar,cast(pl.d_ImporteCo as int)) + '%' END AS 'Coaseguro'  , 
-                
+				
+
 				CASE WHEN liq.v_NroLiquidacion IS NULL THEN 'SIN LIQUIDAR' ELSE liq.v_NroLiquidacion END AS 'Liquidacion' ,  
                 CASE WHEN v1.v_SerieDocumento IS NULL THEN 'SIN COBRAR' ELSE v1.v_SerieDocumento + '-' + v1.v_CorrelativoDocumento END AS 'DOC_L', 
                 CASE WHEN v1.d_Total IS NULL THEN CAST(0.00 AS DECIMAL(14,2)) ELSE CAST(v1.d_Total AS DECIMAL(14,2)) END AS 'Total_L' ,   
@@ -283,7 +280,16 @@ namespace Sigesoft.Node.WinClient.BLL
 				,
 				ISNULL(ppmed.v_FirstName + ' ' + ppmed.v_FirstLastName + ' ' + ppmed.v_SecondLastName,'-') as 'NOMBRE_MED'
 				,
-				ISNULL(dht.v_Value1, '-')  AS 'ESPECIALIDAD_MED'
+				ISNULL(dht.v_Value1, '-')  AS 'ESPECIALIDAD_MED',
+				CASE WHEN p.i_TipoConvenio = 1 THEN 'FIJADO' ELSE 'NO FIJADO' END AS 'TipoConvenio', --X 
+				CONVERT (varchar,cast(p.r_DiscountExam as int)) + '%'  as 'Aumento_Insumos',  --x
+                CASE WHEN pl.d_ImporteFarComercial IS NULL THEN 'NP' ELSE CONVERT (varchar,cast(pl.d_ImporteFarComercial as int)) + '%' END AS 'CoaseguroFarmaciaComercial'  , --X
+				CASE WHEN pl.d_ImporteFarGenerico IS NULL THEN 'NP' ELSE CONVERT (varchar,cast(pl.d_ImporteFarGenerico as int)) + '%' END AS 'CoaseguroFarmaciaGenerico'  , --X
+				CASE WHEN p.i_TipoConvenio = 1 THEN p.v_NombreConvenio ELSE '- - -' END AS 'ConvenioFijado', --X
+				CASE WHEN p.i_TipoConvenio = 1  THEN 'S/.   ' + CONVERT (varchar,cast(p.r_PrecioConvenio as money)) ELSE 'NP' END as 'Convenio_S', --X
+
+				CASE WHEN p.i_TipoConvenio = 1  THEN '- - -' ELSE 'S/.   ' + CONVERT (varchar,cast(p.r_PrecioConsultaFijo as money)) END as 'Consulta_MG',  --X
+				CASE WHEN p.i_TipoConvenio = 1  THEN '- - -' ELSE 'S/.   ' + CONVERT (varchar,cast(p.r_PrecioConsultaEspecialidad1 as money)) END as 'Consulta_Esp' --X
 
                 from service as s  
                 JOIN protocol as p on s.v_ProtocolId = p.v_ProtocolId  
@@ -356,6 +362,20 @@ namespace Sigesoft.Node.WinClient.BLL
                 _oSeguros.USUARIO_MED = lector1.GetValue(27).ToString();
                 _oSeguros.Medico = lector1.GetValue(28).ToString();
                 _oSeguros.ESPECIALIDAD_MED = lector1.GetValue(29).ToString();
+
+                _oSeguros.TipoConvenio = lector1.GetValue(30).ToString();
+                _oSeguros.Aumento_Insumos = lector1.GetValue(31).ToString();
+                _oSeguros.CoaseguroFarmaciaComercial = lector1.GetValue(32).ToString();
+                _oSeguros.CoaseguroFarmaciaGenerico = lector1.GetValue(33).ToString();
+                _oSeguros.ConvenioFijado = lector1.GetValue(34).ToString();
+                _oSeguros.Convenio_S = lector1.GetValue(35).ToString();
+                _oSeguros.Consulta_MG = lector1.GetValue(36).ToString();
+                _oSeguros.Consulta_Esp = lector1.GetValue(37).ToString();
+
+
+
+
+               
 
                 _ListaSeguros.Add(_oSeguros);
             }

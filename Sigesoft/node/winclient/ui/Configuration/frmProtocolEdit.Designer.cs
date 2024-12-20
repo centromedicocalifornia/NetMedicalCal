@@ -146,6 +146,16 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.rbSeguroFijado = new System.Windows.Forms.RadioButton();
+            this.rbSeguroNoFijado = new System.Windows.Forms.RadioButton();
+            this.txtPrecioConevnio = new System.Windows.Forms.TextBox();
+            this.lblPrecio = new System.Windows.Forms.Label();
+            this.txtNombrePlan = new System.Windows.Forms.TextBox();
+            this.lblNombePlan = new System.Windows.Forms.Label();
+            this.txtPrecioMedGen = new System.Windows.Forms.TextBox();
+            this.lblPrecioMedGen = new System.Windows.Forms.Label();
+            this.txtPrecioEspe = new System.Windows.Forms.TextBox();
+            this.lblPrecioEspe = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdProtocolComponent)).BeginInit();
             this.cmProtocol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uvProtocol)).BeginInit();
@@ -252,7 +262,7 @@
             this.grdProtocolComponent.Location = new System.Drawing.Point(5, 28);
             this.grdProtocolComponent.Margin = new System.Windows.Forms.Padding(2);
             this.grdProtocolComponent.Name = "grdProtocolComponent";
-            this.grdProtocolComponent.Size = new System.Drawing.Size(888, 373);
+            this.grdProtocolComponent.Size = new System.Drawing.Size(888, 365);
             this.grdProtocolComponent.TabIndex = 46;
             this.grdProtocolComponent.AfterSelectChange += new Infragistics.Win.UltraWinGrid.AfterSelectChangeEventHandler(this.grdProtocolComponent_AfterSelectChange);
             this.grdProtocolComponent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grdProtocolComponent_MouseDown);
@@ -478,6 +488,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPrecioEspe);
+            this.groupBox1.Controls.Add(this.lblPrecioEspe);
+            this.groupBox1.Controls.Add(this.txtPrecioMedGen);
+            this.groupBox1.Controls.Add(this.lblPrecioMedGen);
+            this.groupBox1.Controls.Add(this.txtNombrePlan);
+            this.groupBox1.Controls.Add(this.lblNombePlan);
+            this.groupBox1.Controls.Add(this.txtPrecioConevnio);
+            this.groupBox1.Controls.Add(this.lblPrecio);
+            this.groupBox1.Controls.Add(this.rbSeguroNoFijado);
+            this.groupBox1.Controls.Add(this.rbSeguroFijado);
             this.groupBox1.Controls.Add(this.cboProcedencia);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.txtAmbulancia);
@@ -532,7 +552,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.MediumBlue;
             this.groupBox1.Location = new System.Drawing.Point(0, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1002, 200);
+            this.groupBox1.Size = new System.Drawing.Size(1002, 221);
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del Protocolo";
@@ -553,7 +573,7 @@
             // txtAmbulancia
             // 
             this.txtAmbulancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmbulancia.Location = new System.Drawing.Point(898, 173);
+            this.txtAmbulancia.Location = new System.Drawing.Point(433, 172);
             this.txtAmbulancia.MaxLength = 250;
             this.txtAmbulancia.Name = "txtAmbulancia";
             this.txtAmbulancia.Size = new System.Drawing.Size(42, 20);
@@ -566,7 +586,7 @@
             this.lblAmbulancia.BackColor = System.Drawing.Color.Transparent;
             this.lblAmbulancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAmbulancia.ForeColor = System.Drawing.Color.Black;
-            this.lblAmbulancia.Location = new System.Drawing.Point(832, 173);
+            this.lblAmbulancia.Location = new System.Drawing.Point(367, 172);
             this.lblAmbulancia.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAmbulancia.Name = "lblAmbulancia";
             this.lblAmbulancia.Size = new System.Drawing.Size(62, 20);
@@ -578,10 +598,10 @@
             // txtSop
             // 
             this.txtSop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSop.Location = new System.Drawing.Point(767, 172);
+            this.txtSop.Location = new System.Drawing.Point(319, 195);
             this.txtSop.MaxLength = 250;
             this.txtSop.Name = "txtSop";
-            this.txtSop.Size = new System.Drawing.Size(42, 20);
+            this.txtSop.Size = new System.Drawing.Size(44, 20);
             this.txtSop.TabIndex = 82;
             this.txtSop.Text = "0.00";
             this.toolTip1.SetToolTip(this.txtSop, "Solo acepta números.");
@@ -591,10 +611,10 @@
             this.lblSop.BackColor = System.Drawing.Color.Transparent;
             this.lblSop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSop.ForeColor = System.Drawing.Color.Black;
-            this.lblSop.Location = new System.Drawing.Point(717, 172);
+            this.lblSop.Location = new System.Drawing.Point(281, 193);
             this.lblSop.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSop.Name = "lblSop";
-            this.lblSop.Size = new System.Drawing.Size(49, 20);
+            this.lblSop.Size = new System.Drawing.Size(33, 20);
             this.lblSop.TabIndex = 81;
             this.lblSop.Text = "SOP";
             this.lblSop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -603,7 +623,7 @@
             // txtCama
             // 
             this.txtCama.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCama.Location = new System.Drawing.Point(659, 171);
+            this.txtCama.Location = new System.Drawing.Point(232, 193);
             this.txtCama.MaxLength = 250;
             this.txtCama.Name = "txtCama";
             this.txtCama.Size = new System.Drawing.Size(42, 20);
@@ -616,10 +636,10 @@
             this.lblCama.BackColor = System.Drawing.Color.Transparent;
             this.lblCama.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCama.ForeColor = System.Drawing.Color.Black;
-            this.lblCama.Location = new System.Drawing.Point(610, 171);
+            this.lblCama.Location = new System.Drawing.Point(187, 193);
             this.lblCama.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCama.Name = "lblCama";
-            this.lblCama.Size = new System.Drawing.Size(49, 20);
+            this.lblCama.Size = new System.Drawing.Size(38, 20);
             this.lblCama.TabIndex = 79;
             this.lblCama.Text = "Cama";
             this.lblCama.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -628,7 +648,7 @@
             // txtOdonto
             // 
             this.txtOdonto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOdonto.Location = new System.Drawing.Point(554, 171);
+            this.txtOdonto.Location = new System.Drawing.Point(139, 194);
             this.txtOdonto.MaxLength = 250;
             this.txtOdonto.Name = "txtOdonto";
             this.txtOdonto.Size = new System.Drawing.Size(42, 20);
@@ -641,10 +661,10 @@
             this.lblOdonto.BackColor = System.Drawing.Color.Transparent;
             this.lblOdonto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOdonto.ForeColor = System.Drawing.Color.Black;
-            this.lblOdonto.Location = new System.Drawing.Point(506, 171);
+            this.lblOdonto.Location = new System.Drawing.Point(92, 194);
             this.lblOdonto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOdonto.Name = "lblOdonto";
-            this.lblOdonto.Size = new System.Drawing.Size(49, 20);
+            this.lblOdonto.Size = new System.Drawing.Size(48, 20);
             this.lblOdonto.TabIndex = 77;
             this.lblOdonto.Text = "% Odon";
             this.lblOdonto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -653,7 +673,7 @@
             // txtFarmacia
             // 
             this.txtFarmacia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFarmacia.Location = new System.Drawing.Point(446, 172);
+            this.txtFarmacia.Location = new System.Drawing.Point(53, 194);
             this.txtFarmacia.MaxLength = 250;
             this.txtFarmacia.Name = "txtFarmacia";
             this.txtFarmacia.Size = new System.Drawing.Size(42, 20);
@@ -666,10 +686,10 @@
             this.lblFarmacia.BackColor = System.Drawing.Color.Transparent;
             this.lblFarmacia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFarmacia.ForeColor = System.Drawing.Color.Black;
-            this.lblFarmacia.Location = new System.Drawing.Point(407, 172);
+            this.lblFarmacia.Location = new System.Drawing.Point(12, 195);
             this.lblFarmacia.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFarmacia.Name = "lblFarmacia";
-            this.lblFarmacia.Size = new System.Drawing.Size(40, 20);
+            this.lblFarmacia.Size = new System.Drawing.Size(36, 20);
             this.lblFarmacia.TabIndex = 75;
             this.lblFarmacia.Text = "% Far";
             this.lblFarmacia.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -678,10 +698,10 @@
             // txtEco
             // 
             this.txtEco.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEco.Location = new System.Drawing.Point(346, 171);
+            this.txtEco.Location = new System.Drawing.Point(319, 172);
             this.txtEco.MaxLength = 250;
             this.txtEco.Name = "txtEco";
-            this.txtEco.Size = new System.Drawing.Size(42, 20);
+            this.txtEco.Size = new System.Drawing.Size(44, 20);
             this.txtEco.TabIndex = 74;
             this.txtEco.Text = "0.00";
             this.toolTip1.SetToolTip(this.txtEco, "Solo acepta números.");
@@ -691,10 +711,10 @@
             this.lblEco.BackColor = System.Drawing.Color.Transparent;
             this.lblEco.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEco.ForeColor = System.Drawing.Color.Black;
-            this.lblEco.Location = new System.Drawing.Point(308, 171);
+            this.lblEco.Location = new System.Drawing.Point(270, 172);
             this.lblEco.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEco.Name = "lblEco";
-            this.lblEco.Size = new System.Drawing.Size(40, 20);
+            this.lblEco.Size = new System.Drawing.Size(44, 20);
             this.lblEco.TabIndex = 73;
             this.lblEco.Text = "% Eco";
             this.lblEco.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -703,7 +723,7 @@
             // txtRayosX
             // 
             this.txtRayosX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRayosX.Location = new System.Drawing.Point(244, 171);
+            this.txtRayosX.Location = new System.Drawing.Point(232, 171);
             this.txtRayosX.MaxLength = 250;
             this.txtRayosX.Name = "txtRayosX";
             this.txtRayosX.Size = new System.Drawing.Size(42, 20);
@@ -716,10 +736,10 @@
             this.lblRX.BackColor = System.Drawing.Color.Transparent;
             this.lblRX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRX.ForeColor = System.Drawing.Color.Black;
-            this.lblRX.Location = new System.Drawing.Point(204, 171);
+            this.lblRX.Location = new System.Drawing.Point(188, 171);
             this.lblRX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRX.Name = "lblRX";
-            this.lblRX.Size = new System.Drawing.Size(40, 20);
+            this.lblRX.Size = new System.Drawing.Size(36, 20);
             this.lblRX.TabIndex = 71;
             this.lblRX.Text = "% RX";
             this.lblRX.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -728,7 +748,7 @@
             // txtLab
             // 
             this.txtLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLab.Location = new System.Drawing.Point(150, 171);
+            this.txtLab.Location = new System.Drawing.Point(139, 171);
             this.txtLab.MaxLength = 250;
             this.txtLab.Name = "txtLab";
             this.txtLab.Size = new System.Drawing.Size(42, 20);
@@ -741,10 +761,10 @@
             this.lblLaboratorio.BackColor = System.Drawing.Color.Transparent;
             this.lblLaboratorio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLaboratorio.ForeColor = System.Drawing.Color.Black;
-            this.lblLaboratorio.Location = new System.Drawing.Point(109, 171);
+            this.lblLaboratorio.Location = new System.Drawing.Point(95, 172);
             this.lblLaboratorio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLaboratorio.Name = "lblLaboratorio";
-            this.lblLaboratorio.Size = new System.Drawing.Size(40, 20);
+            this.lblLaboratorio.Size = new System.Drawing.Size(39, 20);
             this.lblLaboratorio.TabIndex = 69;
             this.lblLaboratorio.Text = "% Lab";
             this.lblLaboratorio.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -786,16 +806,16 @@
             "Seguros",
             "Ocupacional",
             "MTC"});
-            this.cbProcedencia.Location = new System.Drawing.Point(686, 140);
+            this.cbProcedencia.Location = new System.Drawing.Point(420, 148);
             this.cbProcedencia.Name = "cbProcedencia";
-            this.cbProcedencia.Size = new System.Drawing.Size(180, 21);
+            this.cbProcedencia.Size = new System.Drawing.Size(129, 21);
             this.cbProcedencia.TabIndex = 66;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(601, 142);
+            this.label14.Location = new System.Drawing.Point(335, 150);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(67, 13);
             this.label14.TabIndex = 64;
@@ -832,7 +852,7 @@
             this.chkEsActivo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkEsActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEsActivo.ForeColor = System.Drawing.Color.Black;
-            this.chkEsActivo.Location = new System.Drawing.Point(911, 142);
+            this.chkEsActivo.Location = new System.Drawing.Point(493, 193);
             this.chkEsActivo.Name = "chkEsActivo";
             this.chkEsActivo.Size = new System.Drawing.Size(56, 17);
             this.chkEsActivo.TabIndex = 36;
@@ -861,7 +881,7 @@
             this.btnAgregarEmpresaContrata.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarEmpresaContrata.ForeColor = System.Drawing.Color.Black;
             this.btnAgregarEmpresaContrata.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarEmpresaContrata.Image")));
-            this.btnAgregarEmpresaContrata.Location = new System.Drawing.Point(554, 41);
+            this.btnAgregarEmpresaContrata.Location = new System.Drawing.Point(554, 62);
             this.btnAgregarEmpresaContrata.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarEmpresaContrata.Name = "btnAgregarEmpresaContrata";
             this.btnAgregarEmpresaContrata.Size = new System.Drawing.Size(27, 21);
@@ -1063,7 +1083,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(624, 642);
+            this.label4.Location = new System.Drawing.Point(637, 655);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 20);
@@ -1076,7 +1096,7 @@
             // 
             this.cboVendedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboVendedor.FormattingEnabled = true;
-            this.cboVendedor.Location = new System.Drawing.Point(689, 642);
+            this.cboVendedor.Location = new System.Drawing.Point(702, 655);
             this.cboVendedor.Margin = new System.Windows.Forms.Padding(2);
             this.cboVendedor.Name = "cboVendedor";
             this.cboVendedor.Size = new System.Drawing.Size(47, 21);
@@ -1088,7 +1108,7 @@
             this.txtComision.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtComision.Enabled = false;
             this.txtComision.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComision.Location = new System.Drawing.Point(458, 642);
+            this.txtComision.Location = new System.Drawing.Point(471, 655);
             this.txtComision.MaxLength = 250;
             this.txtComision.Name = "txtComision";
             this.txtComision.Size = new System.Drawing.Size(47, 20);
@@ -1102,7 +1122,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(510, 642);
+            this.label2.Location = new System.Drawing.Point(523, 655);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
@@ -1116,7 +1136,7 @@
             this.chkEsComisionable.AutoSize = true;
             this.chkEsComisionable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEsComisionable.ForeColor = System.Drawing.Color.Black;
-            this.chkEsComisionable.Location = new System.Drawing.Point(344, 646);
+            this.chkEsComisionable.Location = new System.Drawing.Point(357, 659);
             this.chkEsComisionable.Name = "chkEsComisionable";
             this.chkEsComisionable.Size = new System.Drawing.Size(108, 17);
             this.chkEsComisionable.TabIndex = 33;
@@ -1129,10 +1149,10 @@
             // 
             this.tabControl1.Controls.Add(this.tpExamenes);
             this.tabControl1.Controls.Add(this.tpUsuariosExternos);
-            this.tabControl1.Location = new System.Drawing.Point(0, 207);
+            this.tabControl1.Location = new System.Drawing.Point(0, 228);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1002, 432);
+            this.tabControl1.Size = new System.Drawing.Size(1002, 424);
             this.tabControl1.TabIndex = 47;
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
@@ -1147,7 +1167,7 @@
             this.tpExamenes.Location = new System.Drawing.Point(4, 22);
             this.tpExamenes.Name = "tpExamenes";
             this.tpExamenes.Padding = new System.Windows.Forms.Padding(3);
-            this.tpExamenes.Size = new System.Drawing.Size(994, 406);
+            this.tpExamenes.Size = new System.Drawing.Size(994, 398);
             this.tpExamenes.TabIndex = 0;
             this.tpExamenes.Text = "Examenes";
             this.tpExamenes.UseVisualStyleBackColor = true;
@@ -1164,7 +1184,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.Black;
             this.btnGuardar.Image = global::Sigesoft.Node.WinClient.UI.Properties.Resources.system_save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(906, 377);
+            this.btnGuardar.Location = new System.Drawing.Point(906, 369);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(2);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 24);
@@ -1483,6 +1503,132 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // rbSeguroFijado
+            // 
+            this.rbSeguroFijado.AutoSize = true;
+            this.rbSeguroFijado.Location = new System.Drawing.Point(587, 146);
+            this.rbSeguroFijado.Name = "rbSeguroFijado";
+            this.rbSeguroFijado.Size = new System.Drawing.Size(90, 17);
+            this.rbSeguroFijado.TabIndex = 87;
+            this.rbSeguroFijado.Text = "Seguro Fijado";
+            this.rbSeguroFijado.UseVisualStyleBackColor = true;
+            this.rbSeguroFijado.CheckedChanged += new System.EventHandler(this.rbSeguroFijado_CheckedChanged);
+            // 
+            // rbSeguroNoFijado
+            // 
+            this.rbSeguroNoFijado.AutoSize = true;
+            this.rbSeguroNoFijado.Checked = true;
+            this.rbSeguroNoFijado.Location = new System.Drawing.Point(707, 146);
+            this.rbSeguroNoFijado.Name = "rbSeguroNoFijado";
+            this.rbSeguroNoFijado.Size = new System.Drawing.Size(70, 17);
+            this.rbSeguroNoFijado.TabIndex = 88;
+            this.rbSeguroNoFijado.TabStop = true;
+            this.rbSeguroNoFijado.Text = "No Fijado";
+            this.rbSeguroNoFijado.UseVisualStyleBackColor = true;
+            this.rbSeguroNoFijado.CheckedChanged += new System.EventHandler(this.rbSeguroNoFijado_CheckedChanged);
+            // 
+            // txtPrecioConevnio
+            // 
+            this.txtPrecioConevnio.Enabled = false;
+            this.txtPrecioConevnio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioConevnio.Location = new System.Drawing.Point(877, 146);
+            this.txtPrecioConevnio.MaxLength = 250;
+            this.txtPrecioConevnio.Name = "txtPrecioConevnio";
+            this.txtPrecioConevnio.Size = new System.Drawing.Size(94, 20);
+            this.txtPrecioConevnio.TabIndex = 90;
+            this.txtPrecioConevnio.Text = "0.00";
+            this.txtPrecioConevnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtPrecioConevnio, "Solo acepta números.");
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.BackColor = System.Drawing.Color.Transparent;
+            this.lblPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecio.ForeColor = System.Drawing.Color.Black;
+            this.lblPrecio.Location = new System.Drawing.Point(798, 146);
+            this.lblPrecio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(68, 20);
+            this.lblPrecio.TabIndex = 89;
+            this.lblPrecio.Text = "Precio S/. ";
+            this.lblPrecio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPrecio.Visible = false;
+            // 
+            // txtNombrePlan
+            // 
+            this.txtNombrePlan.Enabled = false;
+            this.txtNombrePlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombrePlan.Location = new System.Drawing.Point(686, 173);
+            this.txtNombrePlan.MaxLength = 250;
+            this.txtNombrePlan.Name = "txtNombrePlan";
+            this.txtNombrePlan.Size = new System.Drawing.Size(285, 20);
+            this.txtNombrePlan.TabIndex = 92;
+            // 
+            // lblNombePlan
+            // 
+            this.lblNombePlan.BackColor = System.Drawing.Color.Transparent;
+            this.lblNombePlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombePlan.ForeColor = System.Drawing.Color.Black;
+            this.lblNombePlan.Location = new System.Drawing.Point(587, 166);
+            this.lblNombePlan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNombePlan.Name = "lblNombePlan";
+            this.lblNombePlan.Size = new System.Drawing.Size(85, 28);
+            this.lblNombePlan.TabIndex = 91;
+            this.lblNombePlan.Text = "Nombre Plan";
+            this.lblNombePlan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtPrecioMedGen
+            // 
+            this.txtPrecioMedGen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioMedGen.Location = new System.Drawing.Point(683, 199);
+            this.txtPrecioMedGen.MaxLength = 250;
+            this.txtPrecioMedGen.Name = "txtPrecioMedGen";
+            this.txtPrecioMedGen.Size = new System.Drawing.Size(94, 20);
+            this.txtPrecioMedGen.TabIndex = 94;
+            this.txtPrecioMedGen.Text = "0.00";
+            this.txtPrecioMedGen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtPrecioMedGen, "Solo acepta números.");
+            // 
+            // lblPrecioMedGen
+            // 
+            this.lblPrecioMedGen.BackColor = System.Drawing.Color.Transparent;
+            this.lblPrecioMedGen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioMedGen.ForeColor = System.Drawing.Color.Black;
+            this.lblPrecioMedGen.Location = new System.Drawing.Point(587, 198);
+            this.lblPrecioMedGen.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrecioMedGen.Name = "lblPrecioMedGen";
+            this.lblPrecioMedGen.Size = new System.Drawing.Size(81, 20);
+            this.lblPrecioMedGen.TabIndex = 93;
+            this.lblPrecioMedGen.Text = "P Med Gen S/. ";
+            this.lblPrecioMedGen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPrecioMedGen.Visible = false;
+            // 
+            // txtPrecioEspe
+            // 
+            this.txtPrecioEspe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioEspe.Location = new System.Drawing.Point(877, 201);
+            this.txtPrecioEspe.MaxLength = 250;
+            this.txtPrecioEspe.Name = "txtPrecioEspe";
+            this.txtPrecioEspe.Size = new System.Drawing.Size(94, 20);
+            this.txtPrecioEspe.TabIndex = 96;
+            this.txtPrecioEspe.Text = "0.00";
+            this.txtPrecioEspe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtPrecioEspe, "Solo acepta números.");
+            // 
+            // lblPrecioEspe
+            // 
+            this.lblPrecioEspe.BackColor = System.Drawing.Color.Transparent;
+            this.lblPrecioEspe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioEspe.ForeColor = System.Drawing.Color.Black;
+            this.lblPrecioEspe.Location = new System.Drawing.Point(798, 201);
+            this.lblPrecioEspe.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrecioEspe.Name = "lblPrecioEspe";
+            this.lblPrecioEspe.Size = new System.Drawing.Size(68, 20);
+            this.lblPrecioEspe.TabIndex = 95;
+            this.lblPrecioEspe.Text = "P Espe S/. ";
+            this.lblPrecioEspe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPrecioEspe.Visible = false;
+            // 
             // frmProtocolEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1608,5 +1754,15 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.ComboBox cboProcedencia;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtNombrePlan;
+        private System.Windows.Forms.Label lblNombePlan;
+        private System.Windows.Forms.TextBox txtPrecioConevnio;
+        private System.Windows.Forms.Label lblPrecio;
+        private System.Windows.Forms.RadioButton rbSeguroNoFijado;
+        private System.Windows.Forms.RadioButton rbSeguroFijado;
+        private System.Windows.Forms.TextBox txtPrecioEspe;
+        private System.Windows.Forms.Label lblPrecioEspe;
+        private System.Windows.Forms.TextBox txtPrecioMedGen;
+        private System.Windows.Forms.Label lblPrecioMedGen;
     }
 }

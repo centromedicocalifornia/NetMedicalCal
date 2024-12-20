@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProtocolPlanAseguradora));
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 0", -1);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("NombreLinea");
@@ -37,6 +38,8 @@
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("d_Importe", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Descending, false);
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("d_ImporteCo");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("d_ImporteFarComercial");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("d_ImporteFarGenerico");
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
@@ -52,21 +55,20 @@
             Infragistics.Win.Appearance appearance16 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance17 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance18 = new Infragistics.Win.Appearance();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProtocolPlanAseguradora));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAgregarLinea = new System.Windows.Forms.Button();
             this.cboEmpresa = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
             this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.grd = new Infragistics.Win.UltraWinGrid.UltraGrid();
             this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
             this.btnEliminar = new Infragistics.Win.Misc.UltraButton();
             this.btnNuevo = new Infragistics.Win.Misc.UltraButton();
             this.btnSalir = new Infragistics.Win.Misc.UltraButton();
             this.btnGuardar = new Infragistics.Win.Misc.UltraButton();
-            this.btnAgregarLinea = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).BeginInit();
             this.ultraGroupBox1.SuspendLayout();
@@ -90,7 +92,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(646, 446);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(941, 446);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // ultraGroupBox1
@@ -103,9 +105,38 @@
             this.ultraGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ultraGroupBox1.Location = new System.Drawing.Point(3, 3);
             this.ultraGroupBox1.Name = "ultraGroupBox1";
-            this.ultraGroupBox1.Size = new System.Drawing.Size(640, 65);
+            this.ultraGroupBox1.Size = new System.Drawing.Size(935, 65);
             this.ultraGroupBox1.TabIndex = 0;
             this.ultraGroupBox1.Text = "Empresa Aseguradora:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(528, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 13);
+            this.label1.TabIndex = 64;
+            this.label1.Text = "REGISTRAR PLAN";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // btnAgregarLinea
+            // 
+            this.btnAgregarLinea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAgregarLinea.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnAgregarLinea.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAgregarLinea.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAgregarLinea.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnAgregarLinea.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarLinea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarLinea.ForeColor = System.Drawing.Color.Black;
+            this.btnAgregarLinea.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarLinea.Image")));
+            this.btnAgregarLinea.Location = new System.Drawing.Point(531, 31);
+            this.btnAgregarLinea.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAgregarLinea.Name = "btnAgregarLinea";
+            this.btnAgregarLinea.Size = new System.Drawing.Size(82, 21);
+            this.btnAgregarLinea.TabIndex = 63;
+            this.btnAgregarLinea.UseVisualStyleBackColor = false;
+            this.btnAgregarLinea.Click += new System.EventHandler(this.btnAgregarLinea_Click);
             // 
             // cboEmpresa
             // 
@@ -126,6 +157,25 @@
             this.ultraLabel1.Size = new System.Drawing.Size(49, 14);
             this.ultraLabel1.TabIndex = 0;
             this.ultraLabel1.Text = "Empresa";
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(3, 16);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(929, 46);
+            this.shapeContainer1.TabIndex = 65;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 521;
+            this.lineShape1.X2 = 521;
+            this.lineShape1.Y1 = -16;
+            this.lineShape1.Y2 = 44;
             // 
             // grd
             // 
@@ -156,12 +206,16 @@
             ultraGridColumn4.MaskInput = "{double:9.2}";
             ultraGridColumn4.Width = 121;
             ultraGridColumn2.Header.VisiblePosition = 4;
+            ultraGridColumn3.Header.VisiblePosition = 5;
+            ultraGridColumn7.Header.VisiblePosition = 6;
             ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn5,
             ultraGridColumn6,
             ultraGridColumn4,
-            ultraGridColumn2});
+            ultraGridColumn2,
+            ultraGridColumn3,
+            ultraGridColumn7});
             this.grd.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
             this.grd.DisplayLayout.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.grd.DisplayLayout.CaptionVisible = Infragistics.Win.DefaultableBoolean.False;
@@ -220,7 +274,7 @@
             this.grd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grd.Location = new System.Drawing.Point(3, 74);
             this.grd.Name = "grd";
-            this.grd.Size = new System.Drawing.Size(640, 324);
+            this.grd.Size = new System.Drawing.Size(935, 324);
             this.grd.TabIndex = 1;
             this.grd.Text = "ultraGrid1";
             this.grd.CellChange += new Infragistics.Win.UltraWinGrid.CellEventHandler(this.grd_CellChange);
@@ -238,7 +292,7 @@
             this.ultraPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ultraPanel1.Location = new System.Drawing.Point(3, 404);
             this.ultraPanel1.Name = "ultraPanel1";
-            this.ultraPanel1.Size = new System.Drawing.Size(640, 39);
+            this.ultraPanel1.Size = new System.Drawing.Size(935, 39);
             this.ultraPanel1.TabIndex = 2;
             // 
             // btnEliminar
@@ -285,61 +339,13 @@
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnAgregarLinea
-            // 
-            this.btnAgregarLinea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAgregarLinea.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnAgregarLinea.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAgregarLinea.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnAgregarLinea.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnAgregarLinea.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarLinea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarLinea.ForeColor = System.Drawing.Color.Black;
-            this.btnAgregarLinea.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarLinea.Image")));
-            this.btnAgregarLinea.Location = new System.Drawing.Point(531, 31);
-            this.btnAgregarLinea.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAgregarLinea.Name = "btnAgregarLinea";
-            this.btnAgregarLinea.Size = new System.Drawing.Size(82, 21);
-            this.btnAgregarLinea.TabIndex = 63;
-            this.btnAgregarLinea.UseVisualStyleBackColor = false;
-            this.btnAgregarLinea.Click += new System.EventHandler(this.btnAgregarLinea_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(528, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 13);
-            this.label1.TabIndex = 64;
-            this.label1.Text = "REGISTRAR PLAN";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // shapeContainer1
-            // 
-            this.shapeContainer1.Location = new System.Drawing.Point(3, 16);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(634, 46);
-            this.shapeContainer1.TabIndex = 65;
-            this.shapeContainer1.TabStop = false;
-            // 
-            // lineShape1
-            // 
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 521;
-            this.lineShape1.X2 = 521;
-            this.lineShape1.Y1 = -16;
-            this.lineShape1.Y2 = 44;
-            // 
             // frmProtocolPlanAseguradora
             // 
             this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnSalir;
-            this.ClientSize = new System.Drawing.Size(646, 446);
+            this.ClientSize = new System.Drawing.Size(941, 446);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

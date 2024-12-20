@@ -374,6 +374,9 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                     idOrgInter = string.Format("{0}|{1}", _protocolDTO.v_WorkingOrganizationId, _protocolDTO.v_WorkingLocationId);
                 }
 
+                
+
+
                 cbEmpresaTrabajo.SelectedValue = idOrgInter;
                 cbEmpresaCliente.SelectedValue = string.Format("{0}|{1}", _protocolDTO.v_CustomerOrganizationId, _protocolDTO.v_CustomerLocationId);
                 cbEmpresaEmpleadora.SelectedValue = string.Format("{0}|{1}", _protocolDTO.v_EmployerOrganizationId, _protocolDTO.v_EmployerLocationId);
@@ -391,6 +394,19 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                 txtEps.Text = _protocolDTO.r_MedicineDiscount.ToString();
                 txtCamaHosp.Text = _protocolDTO.r_HospitalBedPrice.ToString();
                 txtDiscount.Text = _protocolDTO.r_DiscountExam.ToString();
+
+                if (cbTipoServicio.Text == "SEGUROS")
+                {
+                    rbSeguroFijado.Checked = _protocolDTO.i_TipoConvenio == 1 ? true : false;
+                    rbSeguroNoFijado.Checked = _protocolDTO.i_TipoConvenio == 0 ? true : false;
+                    txtPrecioConevnio.Text = _protocolDTO.r_PrecioConvenio == null ? "0.00" : _protocolDTO.r_PrecioConvenio.ToString();
+                    txtNombrePlan.Text = _protocolDTO.v_NombreConvenio == null ? "- - -" : _protocolDTO.v_NombreConvenio.ToString();
+
+                    txtPrecioMedGen.Text = _protocolDTO.r_PrecioConsultaFijo == null ? "0.00" : _protocolDTO.r_PrecioConsultaFijo.ToString();
+                    txtPrecioEspe.Text = _protocolDTO.r_PrecioConsultaEspecialidad1 == null ? "0.00" : _protocolDTO.r_PrecioConsultaEspecialidad1.ToString();
+
+                }
+
                 // Componentes del protocolo
                 var dataListPc = _protocolBL.GetProtocolComponents(ref objOperationResult, _protocolId);
                 
@@ -402,6 +418,9 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                 {
                     MessageBox.Show("Error en operación:" + System.Environment.NewLine + objOperationResult.ExceptionMessage, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+
+
 
             }
             else if (_mode == "Clon")
@@ -537,7 +556,25 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                 {
                     _protocolDTO.r_DiscountExam = double.Parse(txtDiscount.Text);
                 }
+
+                if (cbTipoServicio.Text == "SEGUROS")
+                {
+                    if (rbSeguroFijado.Checked == true)
+                    {
+                        _protocolDTO.i_TipoConvenio = 1;
+                        _protocolDTO.r_PrecioConvenio = decimal.Parse(txtPrecioConevnio.Text);
+                        _protocolDTO.v_NombreConvenio = txtNombrePlan.Text;
+                    }
+                    else
+                    {
+                        _protocolDTO.i_TipoConvenio = 0;
+                        _protocolDTO.r_PrecioConsultaFijo = decimal.Parse(txtPrecioMedGen.Text);
+                        _protocolDTO.r_PrecioConsultaEspecialidad1 = decimal.Parse(txtPrecioEspe.Text);
+                    }
+
+                }
                 
+
 
                 // Grabar componentes del protocolo
                 if (_mode == "New" || _mode == "Clon")
@@ -1337,6 +1374,17 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                 lblDescuento.Visible = true;
                 txtCamaHosp.Visible = true;
 
+                rbSeguroFijado.Visible = true;
+                rbSeguroNoFijado.Visible = true;
+                lblPrecio.Visible = true;
+                txtPrecioConevnio.Visible = true;
+                lblNombePlan.Visible = true;
+                txtNombrePlan.Visible = true;
+                lblPrecioMedGen.Visible = true;
+                txtPrecioMedGen.Visible = true;
+                lblPrecioEspe.Visible = true;
+                txtPrecioEspe.Visible = true;
+
                 lblMedicina.Visible = false;
                 txtMedicina.Visible = false;
                 lblLaboratorio.Visible = false;
@@ -1381,6 +1429,17 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                 lblFactor.Visible = false;
                 txtFactor.Visible = false;
                 txtEps.Visible = false;
+                rbSeguroFijado.Visible = false;
+                rbSeguroNoFijado.Visible = false;
+                lblPrecio.Visible = false;
+                txtPrecioConevnio.Visible = false;
+                lblNombePlan.Visible = false;
+                txtNombrePlan.Visible = false;
+                lblPrecioMedGen.Visible = false;
+                txtPrecioMedGen.Visible = false;
+                lblPrecioEspe.Visible = false;
+                txtPrecioEspe.Visible = false;
+
                 lblBedHospital.Visible = false;
                 lblDescuento.Visible = false;
                 txtDiscount.Visible = false;
@@ -1412,6 +1471,18 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
                 lblFactor.Visible = false;
                 txtFactor.Visible = false;
                 txtEps.Visible = false;
+
+                rbSeguroFijado.Visible = false;
+                rbSeguroNoFijado.Visible = false;
+                lblPrecio.Visible = false;
+                txtPrecioConevnio.Visible = false;
+                lblNombePlan.Visible = false;
+                txtNombrePlan.Visible = false;
+                lblPrecioMedGen.Visible = false;
+                txtPrecioMedGen.Visible = false;
+                lblPrecioEspe.Visible = false;
+                txtPrecioEspe.Visible = false;
+
                 lblBedHospital.Visible = false;
                 lblDescuento.Visible = false;
                 txtDiscount.Visible = false;
@@ -1518,6 +1589,37 @@ namespace Sigesoft.Node.WinClient.UI.Configuration
             }
             var frm = new frmViewChanges(commentary);
             frm.ShowDialog();
+        }
+
+        private void rbSeguroFijado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSeguroFijado.Checked == true)
+            {
+                txtPrecioConevnio.Enabled = true;
+                txtNombrePlan.Enabled = true;
+
+                txtPrecioMedGen.Enabled = false;
+                txtPrecioEspe.Enabled = false;
+
+                txtPrecioMedGen.Text = "0.00";
+                txtPrecioEspe.Text = "0.00";
+
+            }
+        }
+
+        private void rbSeguroNoFijado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSeguroNoFijado.Checked == true)
+            {
+                txtPrecioConevnio.Enabled = false;
+                txtNombrePlan.Enabled = false;
+                txtPrecioConevnio.Text = "0.00";
+                txtNombrePlan.Text = "";
+
+                txtPrecioMedGen.Enabled = true;
+                txtPrecioEspe.Enabled = true;
+
+            }
         }
     }
 }

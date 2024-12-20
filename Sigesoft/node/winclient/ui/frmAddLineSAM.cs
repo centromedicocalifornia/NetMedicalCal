@@ -109,7 +109,7 @@ namespace Sigesoft.Node.WinClient.UI
                 string NewId = "(No generado)";
                 try
                 {
-                    using (var cnx = ConnectionHelperSige.GetConnection)
+                    using (var cnx = ConnectionHelperSige.GetConnectionSAM)
                     {
                         List<string> _ClientSession = Globals.ClientSession.GetAsList();
                         int intNodeId = int.Parse(_ClientSession[0]);
@@ -119,11 +119,11 @@ namespace Sigesoft.Node.WinClient.UI
                         string nombre = txtLineaNombre.Text;
                         string mes = "";
                         string dia = "";
-                        if (DateTime.Now.Month.ToString().Length == 1){mes = "0" + DateTime.Now.Month.ToString();}
-                        else{mes = DateTime.Now.Month.ToString();}
+                        if (DateTime.Now.Month.ToString().Length == 1) { mes = "0" + DateTime.Now.Month.ToString(); }
+                        else { mes = DateTime.Now.Month.ToString(); }
 
-                        if (DateTime.Now.Day.ToString().Length == 1){dia = "0" + DateTime.Now.Day.ToString();}
-                        else{dia = DateTime.Now.Day.ToString();}
+                        if (DateTime.Now.Day.ToString().Length == 1) { dia = "0" + DateTime.Now.Day.ToString(); }
+                        else { dia = DateTime.Now.Day.ToString(); }
                         string fecha = DateTime.Now.Year.ToString() + "-" + dia + "-" + mes + " 00:00:00.000";
 
                         int userId = int.Parse(_ClientSession[2]);
@@ -134,11 +134,11 @@ namespace Sigesoft.Node.WinClient.UI
 
                         }
                         #endregion
-                        
+
                         if (cnx.State != System.Data.ConnectionState.Open) cnx.Open();
 
-                        string query ="INSERT INTO [dbo].[linea](v_IdLinea,v_Periodo,v_CodLinea,v_Nombre,v_NroCuentaVenta,v_NroCuentaCompra,v_NroCuentaDConsumo,v_NroCuentaHConsumo,i_Eliminado,i_InsertaIdUsuario,t_InsertaFecha,i_ActualizaIdUsuario,t_ActualizaFecha,b_Foto,i_Header) " +
-                            "VALUES ('"+LineId+"',2019,'"+codigo+"','"+nombre+"',1011101,1011101,'','',0,"+userId+",'"+fecha+"',NULL,NULL,NULL,NULL)";
+                        string query = "INSERT INTO [dbo].[linea](v_IdLinea,v_Periodo,v_CodLinea,v_Nombre,v_NroCuentaVenta,v_NroCuentaCompra,v_NroCuentaDConsumo,v_NroCuentaHConsumo,i_Eliminado,i_InsertaIdUsuario,t_InsertaFecha,i_ActualizaIdUsuario,t_ActualizaFecha,b_Foto,i_Header) " +
+                            "VALUES ('" + LineId + "',2019,'" + codigo + "','" + nombre + "',1011101,1011101,'','',0," + userId + ",'" + fecha + "',NULL,NULL,NULL,NULL)";
                         objOperationResult.Success = 1;
                         cnx.Query(query);
                         MessageBox.Show("Se agregó correctamente:", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);

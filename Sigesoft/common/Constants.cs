@@ -11112,7 +11112,13 @@ namespace Sigesoft.Common
         public const string REEVALUACION = "N009-HCL00000010";
 
         #endregion
+        #region CERTIFICADO DE BUENA SALUD
 
+        public const string CERTIFICADO_DE_BUENA_SALUD_ID = "N009-ME000001648";
+
+        public const string CERTIFICADO_DE_BUENA_SALUD_CONCLUSIONES = "N009-MF000007356";
+
+        #endregion
     }
 
 

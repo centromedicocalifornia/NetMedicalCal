@@ -2014,6 +2014,10 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         GenerateDeclaracionJurada(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.DECLARACION_JURADA)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
                         break;
+                    case Constants.CERTIFICADO_DE_BUENA_SALUD_ID:
+                        GenerateCERTIFICADO_DE_BUENA_SALUD(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.CERTIFICADO_DE_BUENA_SALUD_ID)));
+                        _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
+                        break;
                     case Constants.DECLARACION_JURADA_ANTECEDENTES_PERSONALES_ID:
                         GenerateDeclaracionJuradaAntecedentesPersonales(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.DECLARACION_JURADA_ANTECEDENTES_PERSONALES_ID)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
@@ -4596,6 +4600,19 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var filiationData = _pacientBL.GetPacientReportEPS(_serviceId);
 
             DeclaracionJurada.CreateDeclaracionJurada(pathFile, datosP, MedicalCenter, filiationData, serviceComponents);
+        }
+
+        private void GenerateCERTIFICADO_DE_BUENA_SALUD(string pathFile)
+        {
+            var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
+            var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
+            var serviceComponents = _serviceBL.GetServiceComponentsReport(_serviceId);
+            var filiationData = _pacientBL.GetPacientReportEPS(_serviceId);
+
+            var datosGrabo = _serviceBL.DevolverDatosUsuarioGraboExamen((int)CategoryTypeExam.ExamenFisico, _serviceId);
+
+
+            CertificadoBuenaSalud.CreateCreateCERTIFICADO_DE_BUENA_SALUD(pathFile, datosP, MedicalCenter, filiationData, serviceComponents, datosGrabo);
         }
 
         private void GenerateExamen_Medico_Visitantes_GoldFields(string pathFile)

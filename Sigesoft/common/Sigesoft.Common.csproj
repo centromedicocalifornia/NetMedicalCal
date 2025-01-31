@@ -136,6 +136,7 @@
     <Compile Include="Aut_Liberacion_San_Martin.cs" />
     <Compile Include="CertificadoAptitudCompleto.cs" />
     <Compile Include="CertificadoAptitudMedico_Cosapi.cs" />
+    <Compile Include="CertificadoBuenaSalud.cs" />
     <Compile Include="CertificadodeSuficienciaMedicaTrabajosdeRiesgo.cs" />
     <Compile Include="Certificado_AptitudMedicoOcupacional.cs" />
     <Compile Include="Certificado_Psicosensometrico_Datos.cs" />

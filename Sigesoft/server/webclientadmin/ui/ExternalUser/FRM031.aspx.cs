@@ -235,81 +235,96 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser
 
         private List<MyListWeb> LlenarLista()
         {
-            List<MyListWeb> lista = new List<MyListWeb>();
-            int selectedCount = grdData.SelectedRowIndexArray.Length;
-            if (selectedCount > 0)
+            
+            try
             {
-                btnNewCertificado.Enabled = (bool)Session["CertificadoAptitud"];
-                btnNewFichaOcupacional.Enabled = (bool)Session["FichaOcupacional"];
-
-                //btnExAltura.Enabled = (bool)Session["ExamenAltura"];
-                btnFMT1.Enabled = (bool)Session["FMT1"];
-                btnInterConsulta.Enabled = (bool)Session["Interconsultas"];
-                btnToxi.Enabled = true;
-                //btnFMT1.Enabled = (bool)Session["CertificadoAptitud"];
-                if (selectedCount > 1)
+                List<MyListWeb> lista = new List<MyListWeb>();
+                int selectedCount = grdData.SelectedRowIndexArray.Length;
+                if (selectedCount > 0)
                 {
-                    btnNewFichaOcupacional.Enabled = false;
-                    btnNewCertificado.Enabled = false;
-                    btnFMT1.Enabled = false;
-                    btnInterConsulta.Enabled = false;
-                    btnExAltura.Enabled = false;
-                }
-                else
-                {
-                    btnNewFichaOcupacional.Enabled = (bool)Session["FichaOcupacional"];
                     btnNewCertificado.Enabled = (bool)Session["CertificadoAptitud"];
-                    
+                    btnNewFichaOcupacional.Enabled = (bool)Session["FichaOcupacional"];
+
                     //btnExAltura.Enabled = (bool)Session["ExamenAltura"];
                     btnFMT1.Enabled = (bool)Session["FMT1"];
                     btnInterConsulta.Enabled = (bool)Session["Interconsultas"];
-
-                    int rowIndex = grdData.SelectedRowIndexArray[0];
-                    var dataKeys = grdData.DataKeys[rowIndex];
-                    var components = _ServiceBL.GetServiceComponentByServiceIdAndComponentId(dataKeys[0].ToString(), "N009-ME000000303");
-                    if (components != null)
-                        btnToxi.Enabled = true;
+                    btnToxi.Enabled = true;
+                    //btnFMT1.Enabled = (bool)Session["CertificadoAptitud"];
+                    if (selectedCount > 1)
+                    {
+                        btnNewFichaOcupacional.Enabled = false;
+                        btnNewCertificado.Enabled = false;
+                        btnFMT1.Enabled = false;
+                        btnInterConsulta.Enabled = false;
+                        btnExAltura.Enabled = false;
+                    }
                     else
-                        btnToxi.Enabled = false;
+                    {
+                        btnNewFichaOcupacional.Enabled = (bool)Session["FichaOcupacional"];
+                        btnNewCertificado.Enabled = (bool)Session["CertificadoAptitud"];
+
+                        //btnExAltura.Enabled = (bool)Session["ExamenAltura"];
+                        btnFMT1.Enabled = (bool)Session["FMT1"];
+                        btnInterConsulta.Enabled = (bool)Session["Interconsultas"];
+
+                        int rowIndex = grdData.SelectedRowIndexArray[0];
+                        var dataKeys = grdData.DataKeys[rowIndex];
+                        var components = _ServiceBL.GetServiceComponentByServiceIdAndComponentId(dataKeys[0].ToString(), "N009-ME000000303");
+                        if (components != null)
+                            btnToxi.Enabled = true;
+                        else
+                            btnToxi.Enabled = false;
+                    }
+
                 }
-                
-            }
-            else
-            {
-                btnNewCertificado.Enabled = false;
-                btnFMT1.Enabled = false;
-                btnNewFichaOcupacional.Enabled = false;
-                btnInterConsulta.Enabled = false;
-                btnExAltura.Enabled = false;
-                btnToxi.Enabled = false;
-            }
+                else
+                {
+                    btnNewCertificado.Enabled = false;
+                    btnFMT1.Enabled = false;
+                    btnNewFichaOcupacional.Enabled = false;
+                    btnInterConsulta.Enabled = false;
+                    btnExAltura.Enabled = false;
+                    btnToxi.Enabled = false;
+                }
 
-            if (grdData.SelectedRowIndexArray.Length == 0)
-            {
-                List<MyListWeb> lista1 = new List<MyListWeb>();
-                return lista1;
-            }
-            int rowIndex_ = grdData.SelectedRowIndexArray[0];
+                if (grdData.SelectedRowIndexArray.Length == 0)
+                {
+                    List<MyListWeb> lista1 = new List<MyListWeb>();
+                    return lista1;
+                }
+                int rowIndex_ = grdData.SelectedRowIndexArray[0];
 
-            var dataKeys_ = grdData.DataKeys[rowIndex_];
+                var dataKeys_ = grdData.DataKeys[rowIndex_];
 
-            if (dataKeys_[5] == null || dataKeys_[5].ToString() == "0")
-            {
-                btnInterConsulta.Enabled = false;
-            }
-            else
-            {
-                btnInterConsulta.Enabled = true;
-            }
-        
+                //var data = GetDataGlobal.Find(p => p.v_ServiceId == dataKeys_[0]);
 
-            for (int i = 0; i < selectedCount; i++)
-            {
-                int rowIndex = grdData.SelectedRowIndexArray[i];
-
-                var dataKeys = grdData.DataKeys[rowIndex];
-                //for (int j = 0; j < dataKeys.Length; j++)
+                //if (data.v_AptitudeStatusName == "OBSERVADO")
                 //{
+                //    btnInterConsulta.Enabled = false;
+                //}
+                //else
+                //{
+                //    btnInterConsulta.Enabled = true;
+                //}
+
+
+                //if (dataKeys_[5] == null || dataKeys_[5].ToString() == "0")
+                //{
+                //    btnInterConsulta.Enabled = false;
+                //}
+                //else
+                //{
+                btnInterConsulta.Enabled = true;
+                //}
+
+
+                for (int i = 0; i < selectedCount; i++)
+                {
+                    int rowIndex = grdData.SelectedRowIndexArray[i];
+
+                    var dataKeys = grdData.DataKeys[rowIndex];
+                    //for (int j = 0; j < dataKeys.Length; j++)
+                    //{
                     //lista.Add( new MyListWeb< [0].ToString());
                     lista.Add(new MyListWeb
                     {
@@ -318,14 +333,20 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser
                         EmpresaCliente = dataKeys[2].ToString(),
                         Paciente = dataKeys[3].ToString(),
                     });
-                    
-                //}
 
+                    //}
+
+                }
+
+                Session["objLista"] = lista;
+
+                return lista;
             }
-
-            Session["objLista"] = lista;
-
-            return lista;
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         private void BindGrid()

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title>Administración de Servicios</title>
     <link href="../CSS/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,19 +22,19 @@
        <div>
            <asp:GridView ID="GridViewEjemplo" runat="server"  Visible="true"></asp:GridView>
            <asp:Button ID="Button1" runat="server" Text="  Exportar a Excel  " class="button" Icon="PageExcel" OnClick="btnExcel_Click"/>
-           <asp:Label runat="server" Text="PARA REALIZAR LA DESCARGA, PRIMERO DEBE FILTRAR LA INFORMACIÓN" Font-Bold="True" Font-Italic="True" ></asp:label>
+           <asp:Label ID="Label1" runat="server" Text="PARA REALIZAR LA DESCARGA, PRIMERO DEBE FILTRAR LA INFORMACIÓN" Font-Bold="True" Font-Italic="True" ></asp:label>
        </div>   
     <x:Pagemanager ID="PageManager1" runat="server" AutoSizePanelID="Panel1"  />
      <x:Panel ID="Panel1" runat="server"  ShowBorder="True" ShowHeader="True" Title="Administrador de Servicios" EnableBackgroundColor="true" Layout="VBox" 
           BoxConfigAlign="Stretch" BoxConfigPosition="Start" BoxConfigChildMargin="3 7 12 5" AutoWidth ="true" AutoScroll="true" >
          
          <Items>
-            <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" Height="140" AutoHeight="true" AutoScroll="true" Layout="Fit">    
-                 
+            <x:GroupPanel runat="server" Title="Búsqueda / Filtro" ID="GroupPanel1" AutoWidth="true" Height="140" AutoHeight="true" AutoScroll="true">    
                 <Items>
                     <x:Form ID="Form2" runat="server" EnableBackgroundColor="true" ShowBorder="true" ShowHeader="false" LabelWidth="90px" LabelAlign="Left" AutoHeight="true">
                             <Rows>
-                                <x:FormRow ColumnWidths="200px 200px 100px" runat="server">
+				
+				<x:FormRow ColumnWidths="460px 460px" ID="FormRow10" runat="server">
                                     <Items> 
                                         <x:Form ID="Form3"   runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left">
                                             <Rows>
@@ -58,31 +58,24 @@
                                         </x:Form>
                                     </Items>
                                 </x:FormRow>
-                                <x:FormRow ID="FormRow2" ColumnWidths="460px 460px"  runat="server">
+                                <x:FormRow ColumnWidths="460px 460px" ID="FormRow11" runat="server">
                                     <Items>
                                         <x:Form ID="Form4"  runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left">
                                             <Rows>
-                                                <x:FormRow ColumnWidths="460px" ID="FormRow3" runat="server" >
+						<x:FormRow ColumnWidths="230px 200px" runat="server" >
                                                     <Items>
                                                         <x:TextBox ID="txtTrabajador" Label="Nombre" runat="server"/>  
+							<x:DropDownList ID="ddlEmpresa" Label="Empresa" runat="server" />
                                                     </Items>
                                                 </x:FormRow>
                                             </Rows>
                                         </x:Form> 
-                                        <x:Form ID="Form7"  runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="70px" LabelAlign="Left">
-                                            <Rows>
-                                                <x:FormRow ColumnWidths="460px" ID="FormRow7" runat="server" >
-                                                    <Items>
-                                                         <x:DropDownList ID="ddlEmpresa" Label="Empresa" runat="server" />
-                                                    </Items>
-                                                </x:FormRow>
-                                            </Rows>
-                                        </x:Form> 
-                                    <x:Button ID="btnFilter" Text="--Filtrar--" Icon="Find" IconAlign="Left" runat="server" OnClick="btnFilter_Click"  ValidateForms="Form2"  ></x:Button>                         
-
+                                        
+                                            
+					
                                     </Items>
                                 </x:FormRow>
-                                <x:FormRow ColumnWidths="460px 460px" ID="FormRow1"  runat="server">
+                                <x:FormRow ColumnWidths="460px 460px 100px" ID="FormRow3" runat="server">
                                     <Items>
                                         <x:Form ID="Form5"  runat="server" EnableBackgroundColor="true" ShowBorder="False" ShowHeader="False" LabelWidth="90px" LabelAlign="Left">
                                             <Rows>
@@ -104,7 +97,8 @@
                                                 </x:FormRow>
                                             </Rows>
                                         </x:Form> 
-                                        
+                                        <x:Button ID="btnFilter" Text="--Filtrar--" Icon="Find" IconAlign="Left" runat="server" OnClick="btnFilter_Click"  ValidateForms="Form2"  ></x:Button>                 
+
                                     </Items>
                                 </x:FormRow>
                                 <x:FormRow  ColumnWidths="840px 100px" ID="FormRow6"  runat="server">

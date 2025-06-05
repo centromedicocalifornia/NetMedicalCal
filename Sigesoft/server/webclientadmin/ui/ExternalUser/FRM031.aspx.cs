@@ -118,8 +118,8 @@ namespace Sigesoft.Server.WebClientAdmin.UI.ExternalUser
                 row = table.NewRow();
                 row["Id"] = item.v_ServiceId;
                 row["Trabajador"] = item.v_Trabajador;
-                row["Edad"] = item.v_Trabajador;
-                row["Sexo"] = item.v_Trabajador;
+                row["Edad"] = item.Edad;
+                row["Sexo"] = item.Sexo;
                 row["Fecha"] = item.d_ServiceDate;
                 row["Aptitud"] = item.v_AptitudeStatusName;
                 row["DxFinal"] = item.DxFinal;

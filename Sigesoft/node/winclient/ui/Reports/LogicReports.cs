@@ -204,7 +204,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                 ReportDocument rp = null;
                 switch (componentId)
                 {
-                        
+
                     case Constants.INFORME_CERTIFICADO_APTITUD:
                         //ARNOLD STORE (GetAptitudeCertificateRefactNew)
                         var INFORME_CERTIFICADO_APTITUD = _serviceBL.GetAptitudeCertificateRefact(ref objOperationResult, _serviceId);
@@ -260,9 +260,9 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         ds1_EMP.Tables.Add(dtINFORME_CERTIFICADO_APTITUD_EMP);
                         var TipoServicio_EMP = INFORME_CERTIFICADO_APTITUD_EMP[0].i_EsoTypeId;
                         ReportDocument rp_EMP = null;
-                        if (TipoServicio_EMP == ((int)TypeESO.Retiro).ToString()) 
+                        if (TipoServicio_EMP == ((int)TypeESO.Retiro).ToString())
                         {
-                            rp_EMP = new crOccupationalMedicalAptitudeCertificateEMPRESA(); 
+                            rp_EMP = new crOccupationalMedicalAptitudeCertificateEMPRESA();
                         }
                         else
                         {
@@ -295,7 +295,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp_TRAB.Dispose();
                         break;
                     case Constants.INFORME_ANTECEDENTE_PATOLOGICO:
-                        
+
                         var INFORME_ANTECEDENTE_PATOLOGICO = _serviceBL.GetReportAntecedentePatologico(_pacientId, _serviceId);
                         dsGetRepo = new DataSet();
                         DataTable dtANTECEDENTE_PATOLOGICO_ID = BLL.Utils.ConvertToDatatable(INFORME_ANTECEDENTE_PATOLOGICO);
@@ -314,7 +314,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         filesName.Add(objDiskOpt.DiskFileName);
                         unirPdfS = filesName.ToList();
                         UnisReportes(unirPdfS, Constants.INFORME_ANTECEDENTE_PATOLOGICO, mergeExPDF);
-                          rp.Close();
+                        rp.Close();
                         rp.Dispose();
                         break;
 
@@ -343,7 +343,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         filesName.Add(objDiskOpt.DiskFileName);
                         unirPdfS = filesName.ToList();
                         UnisReportes(unirPdfS, Constants.OSTEO_COIMO, mergeExPDF);
-                           rp.Close();
+                        rp.Close();
                         rp.Dispose();
                         break;
 
@@ -373,7 +373,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                             rp = new crDeclaracion_YanaGold();
                             GenerarReporte(rp, dsGetRepo, _ruta, objDiskOpt, Constants.INFORME_DECLARACION_CI);
                         }
-                         rp.Close();
+                        rp.Close();
                         rp.Dispose();
                         break;
 
@@ -416,7 +416,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
 
 
                     case Constants.OSTEO_MUSCULAR_ID_1:
-                        
+
                         DataSet dsOsteomuscularNuevo = new DataSet();
                         var servicesId7 = new List<string>();
                         servicesId7.Add(_serviceId);
@@ -457,7 +457,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         break;
 
                     case Constants.INFORME_CERTIFICADO_APTITUD_EMPRESARIAL:
-                        
+
                         var Path123 = Application.StartupPath;
                         //ARNOLD STORE
                         var INFORME_CERTIFICADO_APTITUD_EMPRESARIAL = _serviceBL.GetCAPE(_serviceId);
@@ -485,7 +485,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                             }
                         }
                         GenerarReporte(rp, dsGetRepo, _ruta, objDiskOpt, Constants.INFORME_CERTIFICADO_APTITUD_EMPRESARIAL);
-                              
+
                         rp.Close();
                         rp.Dispose();
 
@@ -511,7 +511,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         break;
 
                     case Constants.ALTURA_ESTRUCTURAL_ID:
-                        
+
                         var servicesId9 = new List<string>();
                         servicesId9.Add(_serviceId);
                         var componentReportId9 = _serviceBL.ObtenerIdsParaImportacionExcel(servicesId9, 7);
@@ -523,7 +523,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         dsGetRepo.Tables.Add(dt_ALTURA_ESTRUCTURAL_ID);
                         rp = new crAlturaMayor();
                         GenerarReporte(rp, dsGetRepo, _ruta, objDiskOpt, Constants.ALTURA_ESTRUCTURAL_ID);
-                         rp.Close();
+                        rp.Close();
                         rp.Dispose();
                         break;
 
@@ -600,12 +600,12 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp.Export();
                         rp.Close();
                         rp.Dispose();
-                        
+
                         break;
                     #endregion
 
                     case Constants.ODONTOGRAMA_ID:
-                        
+
                         var Path1 = Application.StartupPath;
                         //ARNOLD STORE
                         var ODONTOGRAMA_ID = _serviceBL.ReportOdontograma(_serviceId, Constants.ODONTOGRAMA_ID, Path1);
@@ -622,7 +622,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         break;
 
                     case Constants.AUDIOMETRIA_ID:
-                        
+
                         var serviceBL = _serviceBL;
                         DataSet dsAudiometria = new DataSet();
                         //ARNOLD STORE
@@ -730,7 +730,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
 
                     #region Ginecología
                     case Constants.GINECOLOGIA_ID:      // Falta implementar
-                        
+
                         var GINECOLOGIA_ID = _serviceBL.GetReportEvaluacionGinecologico(_serviceId, Constants.GINECOLOGIA_ID);
 
                         dsGetRepo = new DataSet();
@@ -750,13 +750,13 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp.Export();
                         rp.Close();
                         rp.Dispose();
-                        
+
                         break;
                     #endregion
 
-                        //OLD NO USO
+                    //OLD NO USO
                     case Constants.OFTALMOLOGIA_ID:
-                        
+
                         var OFTALMO_ANTIGUO = new PacientBL().GetOftalmologia(_serviceId, Constants.OFTALMOLOGIA_ID);
 
                         dsGetRepo = new DataSet();
@@ -919,10 +919,10 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         dsGetRepo.Tables.Add(dt_C_N_ID);
                         rp = new crCuestionarioNordico();
                         objDiskOpt = GenerarReporteUnido(rp, dsGetRepo, _ruta, objDiskOpt, Constants.C_N_ID + "01.pdf");
-                        
+
                         filesName.Add(objDiskOpt.DiskFileName);
 
-                        
+
                         rp = new crCuestionarioNordico_02();
                         objDiskOpt = GenerarReporteUnido(rp, dsGetRepo, _ruta, objDiskOpt, Constants.C_N_ID + "02.pdf");
                         filesName.Add(objDiskOpt.DiskFileName);
@@ -1007,7 +1007,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp.Export();
                         rp.Close();
                         rp.Dispose();
-                        
+
                         break;
                     #endregion
 
@@ -1046,7 +1046,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
 
 
                     case Constants.TEST_VERTIGO_ID:
-                        
+
                         var servicesId3 = new List<string>();
                         servicesId3.Add(_serviceId);
                         var componentReportId = _serviceBL.ObtenerIdsParaImportacionExcel(servicesId3, 11);
@@ -1204,9 +1204,9 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp.Close();
                         rp.Dispose();
                         break;
-                        
+
                     case Constants.SOMNOLENCIA_ID:
-                        
+
                         var servicesId11 = new List<string>();
                         servicesId11.Add(_serviceId);
                         var componentReportId11 = _serviceBL.ObtenerIdsParaImportacionExcel(servicesId11, 11);
@@ -1221,7 +1221,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp.Close();
                         rp.Dispose();
                         break;
-                        
+
                     case Constants.ACUMETRIA_ID:
                         //OLD
                         var ACUMETRIA_ID = _serviceBL.ReporteAcumetria(_serviceId, Constants.ACUMETRIA_ID);
@@ -1234,7 +1234,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         rp.Close();
                         rp.Dispose();
                         break;
-                        
+
                     case Constants.EVA_ERGONOMICA_ID:
                         //ARNOLD STORE
                         var EVA_ERGONOMICA_ID = _serviceBL.ReporteErgnomia(_serviceId, Constants.EVA_ERGONOMICA_ID);
@@ -1632,7 +1632,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         var DatosServicio1 = _serviceBL.GetServiceShort(_serviceId);
                         var ruta2 = Common.Utils.GetApplicationConfigValue("InformeTrab2").ToString();
                         CreateFichaMedicaTrabajador2(string.Format("{0}.pdf", Path.Combine(ruta2, DatosServicio1.Empresa + "-" + DatosServicio1.Paciente + "-" + Constants.INFORME_FICHA_MEDICA_TRABAJADOR_2 + "-" + DatosServicio1.FechaServicio.Value.ToString("dd MMMM,  yyyy"))));
-                        
+
                         //ARNOLD STORE
                         CreateFichaMedicaTrabajador2(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.INFORME_FICHA_MEDICA_TRABAJADOR_2)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
@@ -1711,7 +1711,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         GenerateInvestigacionEpidemiologicaCOVID19(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.FICHA_INVESTIGACION_COVID_ID)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
                         break;
-                        //NEW
+                    //NEW
                     case Constants.FICHA_DE_INVESTIGACIÓN_CLÍNICO_EPIDEMIOLÓGICO_COVID_19_ÚNICA_ID:
                         GenerateFicha_Investigacion_Clinica_Epidemiologica_Unica_COV(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.FICHA_DE_INVESTIGACIÓN_CLÍNICO_EPIDEMIOLÓGICO_COVID_19_ÚNICA_ID)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
@@ -2300,7 +2300,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                         GenerateCertificadoEvaluacionesMedicasPsicologicasConducir(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.CERTIFICADO_EVALUACION_MEDICA_PSICOLOGICA_CONDUCIR_ID)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
                         break;
-                        //REPORTES ASISTENCIAL
+                    //REPORTES ASISTENCIAL
                     case Constants.INFORME_LABORATORIO_CLINICO:
                         GenerateLaboratorioReport(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.INFORME_LABORATORIO_CLINICO)));
                         _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
@@ -2433,7 +2433,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             }
         }
 
-       
+
         private void GenerateAtencionIntegral(string pathFile)
         {
             //var _DataService = _serviceBL.GetServiceReport(_serviceId);
@@ -2513,11 +2513,11 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var _listMedicoPersonales = _historyBL.GetPersonMedicalHistoryReport(_pacientId);
 
 
-            AtencionIntegral.CreateAtencionIntegral(pathFile, medico, datosP, listAntecedentes, MedicalCenter, 
-                exams, datosNin, datosAdol, datosAdul, listEmb, datosAdulMay, diagnosticRepository, medicina, 
+            AtencionIntegral.CreateAtencionIntegral(pathFile, medico, datosP, listAntecedentes, MedicalCenter,
+                exams, datosNin, datosAdol, datosAdul, listEmb, datosAdulMay, diagnosticRepository, medicina,
                 _ExamenesServicio, medicoTratante, datosGrabo, DataSource, ListadditExam, añosCompleto,
-                _listaPatologicosFamiliares, _listMedicoPersonales, _listaHabitoNocivos );
-            
+                _listaPatologicosFamiliares, _listMedicoPersonales, _listaHabitoNocivos);
+
         }
 
         #region REPORTES MEDICOS
@@ -2527,7 +2527,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var exams = _serviceBL.GetServiceComponentsReport(_serviceId);
             var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
             var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
-          
+
             var diagnosticRepository = _serviceBL.GetServiceComponentConclusionesDxServiceIdReport(_serviceId);
             var medico = _pacientBL.ObtenerDatosMedicoMedicina(_serviceId, Constants.ATENCION_INTEGRAL_ID, Constants.CARDIOLOGIA_RIESGO_QUIRURGICO_ID);
             var _ExamenesServicio = _serviceBL.GetServiceComponentsReport(_serviceId);
@@ -2912,7 +2912,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
         }
 
 
-       
+
 
         private string DiferenciaFechas(DateTime newdt, DateTime olddt)
         {
@@ -2978,7 +2978,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             InformeLaboratorioAsistencial.CreateExamen_InformeLaboratorioAsistencial(filiationData, serviceComponents, MedicalCenter, datosP, pathFile, datosGrabo, _NombreMedico, _NombreEmpresa);
         }
         #region COVID 19
-        
+
         private void Generate_FICHA_DE_REPORTE_DE_RESULTADOS_DE_PRUEBA_ANTIGENO_COVID_19_LC(string pathFile)
         {
             var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
@@ -3784,7 +3784,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                                     pathFile);
 
         }
-           
+
         private void Generate_CULTIVO_DE_SALMONELLA_Y_SHINGELLA(string pathFile)
         {
             var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
@@ -4056,7 +4056,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var Audiometria = _serviceBL.ValoresComponenteOdontograma1(_serviceId, Constants.FICHA_AUDIOMETRICA_HUDBAY_ID);
             var diagnosticRepository = _serviceBL.GetServiceComponentConclusionesDxServiceIdReport(_serviceId);
             var antecedentesOcupacionales = _serviceBL.AntecedentesOcupacionales(filiationData.v_PersonId);
-            
+
             var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
             var LogoEmpresa = _serviceBL.GetLogoEmpresa(datosP.v_WorkingOrganizationId);
 
@@ -4470,7 +4470,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
             var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
             var filiationData = _pacientBL.GetPacientReportEPS(_serviceId);
-            
+
             ConsensimientoInformadoVIH.CreateConsentimientoInformadoCIH(pathFile, datosP, MedicalCenter, filiationData);
         }
         private void GenerateCertificado_Suficiencia_Medica_Trabajos_Altura(string pathFile)
@@ -4784,7 +4784,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
             var serviceComponents = _serviceBL.GetServiceComponentsReport(_serviceId);
             var filiationData = _pacientBL.GetPacientReportEPS(_serviceId);
-            var datosGrabo = _serviceBL.DevolverDatosUsuarioGraboExamen((int)CategoryTypeExam.MedicinaFisicaRehabilitacionOcupacional	, _serviceId);
+            var datosGrabo = _serviceBL.DevolverDatosUsuarioGraboExamen((int)CategoryTypeExam.MedicinaFisicaRehabilitacionOcupacional, _serviceId);
             var LogoEmpresa = _serviceBL.GetLogoEmpresa(datosP.v_WorkingOrganizationId);
             var antecedentes = _pacientBL.AntecedentesmEDICOS(datosP.v_PersonId);
 
@@ -5278,7 +5278,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             Declaracion_Jurada_EMO_Secutiras.CreateDeclaracion_Jurada_EMO_Secutiras(pathFile, datosP, MedicalCenter, filiationData, serviceComponents);
         }
 
-        #region  MTC 
+        #region  MTC
         private void GenerateInformacion_Laboratorio(string pathFile)
         {
             var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
@@ -5365,7 +5365,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
         //
 
         #endregion
-        
+
 
         private void GenerateExamen_Dermatologico_Ocupacional(string pathFile)
         {

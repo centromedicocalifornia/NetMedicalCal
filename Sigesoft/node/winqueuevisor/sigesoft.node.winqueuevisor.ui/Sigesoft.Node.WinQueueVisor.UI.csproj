@@ -100,7 +100,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Speech">
-      <HintPath>..\..\..\..\..\..\..\CSL\SIGESOFT\Sigesoft_New\Sigesoft\common\bin\Debug\libs\Microsoft.Speech.dll</HintPath>
+      <HintPath>..\..\..\..\ExternalLibraries\Microsoft.Speech.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic">
       <Private>True</Private>

@@ -54,7 +54,7 @@ namespace Sigesoft.Common
         public const string CARDIOLOGIA_INFORME_ELECTRO_CARDIOGRÁFICO_INTERVALO_QTC = "N009-MF000006992";
         public const string CARDIOLOGIA_INFORME_ELECTRO_CARDIOGRÁFICO_EJE_CARDIACO = "N009-MF000006993";
         public const string CARDIOLOGIA_INFORME_ELECTRO_CARDIOGRÁFICO_HALLAZGO = "N009-MF000006994";
-       
+
         #endregion
 
         #region CARDIOLOGIA - EVALUACIÓN CARDIOLÓGICA
@@ -82,7 +82,7 @@ namespace Sigesoft.Common
         public const string CARDIOLOGIA_EVALUACION_CARDIOLOGICA_CLAS_PORCENTAJE_RIESGO = "N009-MF000007012";
         public const string CARDIOLOGIA_EVALUACION_CARDIOLOGICA_CLAS_CLASIFICACION = "N009-MF000007013";
 
-        public const string CARDIOLOGIA_EVALUACION_CARDIOLOGICA_EVAL_EX_FISICO= "N009-MF000007014";
+        public const string CARDIOLOGIA_EVALUACION_CARDIOLOGICA_EVAL_EX_FISICO = "N009-MF000007014";
         public const string CARDIOLOGIA_EVALUACION_CARDIOLOGICA_EVAL_EKG = "N009-MF000007015";
 
 
@@ -135,7 +135,7 @@ namespace Sigesoft.Common
 
 
 
- 
+
         #endregion
 
         #region OTORRINOLARINGOLOGIA - INFORME OTORRINO
@@ -148,7 +148,7 @@ namespace Sigesoft.Common
         public const string OTORRINO_INFORME_OTORRINO_TIMPANO_OI = "N009-MF000006972";
         public const string OTORRINO_INFORME_OTORRINO_NARIZ = "N009-MF000006973";
         public const string OTORRINO_INFORME_OTORRINO_FARINGE = "N009-MF000006974";
- 
+
         public const string OTORRINO_INFORME_OTORRINO_Dx_CLINICO = "N009-MF000006975";
         public const string OTORRINO_INFORME_OTORRINO_CONCLUSIONES = "N009-MF000006976";
 
@@ -347,7 +347,7 @@ namespace Sigesoft.Common
         public const string CERTIFICADO_SUFICIENCIA_MEDICA_TRABAJOS_RIESGO_3_1_1 = "N009-MF000007063";
         public const string CERTIFICADO_SUFICIENCIA_MEDICA_TRABAJOS_RIESGO_3_1_2 = "N009-MF000007064";
         public const string CERTIFICADO_SUFICIENCIA_MEDICA_TRABAJOS_RIESGO_3_1_3 = "N009-MF000007065";
-       
+
         public const string CERTIFICADO_SUFICIENCIA_MEDICA_TRABAJOS_RIESGO_3_2_1 = "N009-MF000007066";
         public const string CERTIFICADO_SUFICIENCIA_MEDICA_TRABAJOS_RIESGO_3_2_2 = "N009-MF000007067";
         public const string CERTIFICADO_SUFICIENCIA_MEDICA_TRABAJOS_RIESGO_3_2_3 = "N009-MF000007068";
@@ -954,7 +954,7 @@ namespace Sigesoft.Common
         public const string CONSTANCIA_DE_SALUD_PARA_PRUEBA_COVID_1 = "N009-MF000006844";
         public const string CONSTANCIA_DE_SALUD_PARA_PRUEBA_COVID_2 = "N009-MF000006845";
         public const string CONSTANCIA_DE_SALUD_PARA_PRUEBA_COVID_3 = "N009-MF000006846";
-        
+
         #endregion
 
         #region Anticuerpos Neutralizantes COVID 19
@@ -2607,7 +2607,21 @@ namespace Sigesoft.Common
         public const string INSULINA_ID = "N009-ME000000921";
         public const string INSULINA_VALOR = "N009-MF000007350";
         public const string INSULINA_VALOR_DESEABLE = "N009-MF000007351";
-       
+
+        #endregion
+        #region DENGUE
+        public const string DENGUE_ID_ASIST = "N009-ME000001653";
+
+        public const string DENGUE_1_1 = "N009-MF000007359";
+        public const string DENGUE_1_2 = "N009-MF000007360";
+        public const string DENGUE_1_3 = "N009-MF000007361";
+        public const string DENGUE_1_4 = "N009-MF000007362";
+        public const string DENGUE_1_5 = "N009-MF000007363";
+        public const string DENGUE_2_1 = "N009-MF000007364";
+        public const string DENGUE_2_2 = "N009-MF000007365";
+        public const string DENGUE_2_3 = "N009-MF000007366";
+        public const string DENGUE_3_1 = "N009-MF000007367";
+        public const string DENGUE_3_2 = "N009-MF000007368";
         #endregion
         #endregion
 
@@ -2694,7 +2708,7 @@ namespace Sigesoft.Common
         public const string HM_EOSINOFILOS_VALOR_DESEABLE = "N009-MF000007338";
         public const string HM_BASOFILOS_VALOR = "N009-MF000007339";
         public const string HM_BASOFILOS_VALOR_DESEABLE = "N009-MF000007340";
-        
+
         #endregion
 
         #region TIEMPO DE COAGULACION Y SANGRIA - LAB
@@ -2738,7 +2752,7 @@ namespace Sigesoft.Common
         public const string HEMOGLOBINA_ID_aS = "N010-ME000000291";
         public const string HEMOGLOBINA_AS_VALOR = "N009-MF000007342";
         public const string HEMOGLOBINA_AS_VALOR_DESEABLE = "N009-MF000007343";
-       
+
         #endregion
 
 
@@ -6151,7 +6165,7 @@ namespace Sigesoft.Common
         public const string EXTASIS_RESULTADO_ID = "N009-MF000003218";
         #endregion
 
-       
+
 
         #region toxicologia todos
         public const string TOXICOLOGICO_COCAINA_MARIHUANA_T = "N009-ME000000461";
@@ -9006,7 +9020,7 @@ namespace Sigesoft.Common
         #region CALCUO STS USER CONTROL
 
         public const string UserControlSTS = "N002-MF000000200";
-        
+
         public const string txt_VA_OD = "N002-STS00000001";
         public const string txt_VA_OI = "N002-STS00000002";
 
